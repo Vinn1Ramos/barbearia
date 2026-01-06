@@ -17,7 +17,7 @@ function handleScroll() {
     } else {
         nav.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
     }
-});
+};
 
 /*
  * LoginRadius (autenticação)
