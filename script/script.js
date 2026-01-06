@@ -100,7 +100,7 @@ if (_registerForm) _registerForm.addEventListener('submit', handleRegisterSubmit
 
 /* Bloqueio do CTA 'Agendar agora' - mostra modal se usuário não autenticado */
 function requireLoginForAgendar() {
-    var cta = document.querySelector('.hero .cta-agendar');
+    var cta = document.querySelector('.cta-agendar');
     if (!cta) return;
 
     cta.addEventListener('click', function (e) {
