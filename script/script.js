@@ -1,13 +1,10 @@
 /* script/script.js
- * Arquivo principal de comportamentos JS para a página estática
+ * Comportamentos JS principais
  * - Efeito visual do header ao rolar
- * - Integração mínima com LoginRadius para login/cadastro (exemplo)
+ * - Handlers de login/registro (integração LoginRadius - exemplo)
+ * - Bloqueio do CTA 'Agendar' para usuários não autenticados com modal personalizado
  */
-/*
- * Efeito de mudar a cor da navbar ao rolar a página
- * Descrição: adiciona um listener de scroll que altera a cor de fundo do elemento <header>
- * Uso: mantém a navbar visível em rolagens longas
- */
+
 // Scroll: altera o fundo do header ao rolar a página
 function handleScroll() {
     const nav = document.querySelector('header');
@@ -19,10 +16,11 @@ function handleScroll() {
     }
 };
 
-/*
- * LoginRadius (autenticação)
- * Nota: configuração mantendo os valores originais; se não usar LoginRadius remova/oculte essas chaves
- * As credenciais abaixo estão presentes no repositório — considere movê-las para variáveis de ambiente
+
+window.addEventListener('scroll', handleScroll);
+
+/* LoginRadius (autenticação)
+ * Nota: valores mantidos do repositório; remova ou mova para variáveis de ambiente em produção.
  */
 var loginRadiusV2 = loginRadiusV2 || {};
 loginRadiusV2.util = loginRadiusV2.util || {};
@@ -36,50 +34,129 @@ loginRadiusV2.util.ready = function(callback) {
 
 /* Inicializa a configuração do SDK LoginRadius — comente/remova se não for utilizado */
 loginRadiusV2.util.ready(function() {
-    LoginRadiusSDK.setLoginRadiusConfig("ramosbarbearia", {
-        hashKey: "1f40c717-bc79-4ea4-a7d6-8e22db12788c", // TODO: mover para ambiente seguro
-        apiKey: "sidzrYtYiLtOZ4AQMH5bYMGqVciYeR5MdNe8BHu7yZM", // TODO: mover para ambiente seguro
-        v2Flows: true
+    if (typeof LoginRadiusSDK !== 'undefined' && LoginRadiusSDK.setLoginRadiusConfig) {
+        LoginRadiusSDK.setLoginRadiusConfig('ramosbarbearia', {
+            hashKey: '1f40c717-bc79-4ea4-a7d6-8e22db12788c', // TODO: mover para ambiente seguro
+            apiKey: 'sidzrYtYiLtOZ4AQMH5bYMGqVciYeR5MdNe8BHu7yZM', // TODO: mover para ambiente seguro
+            v2Flows: true
+        });
+    }
+
+    // inicializações que dependem do DOM
+    requireLoginForAgendar();
+});
+
+/* Handlers de formulário: login e registro (aplicam-se se os formulários existirem na página) */
+function handleLoginSubmit(e) {
+    e.preventDefault();
+
+    var email = document.getElementById('login-email')?.value;
+    var password = document.getElementById('login-password')?.value;
+
+    if (typeof LoginRadiusSDK !== 'undefined' && LoginRadiusSDK.login) {
+        LoginRadiusSDK.login({ email: email, password: password }, function(response) {
+            localStorage.setItem('token', response.access_token);
+            // redireciona para `next` se presente na query string
+            var params = new URLSearchParams(window.location.search);
+            var next = params.get('next');
+            if (next) {
+                try { window.location.href = decodeURIComponent(next); }
+                catch (e) { window.location.href = next; }
+            } else {
+                window.location.href = '/dashboard.html';
+            }
+        }, function(error) {
+            alert(error.Description || 'Erro no login');
+        });
+    } else {
+        alert('Login SDK não disponível.');
+    }
+}
+
+var _loginForm = document.getElementById('login-form');
+if (_loginForm) _loginForm.addEventListener('submit', handleLoginSubmit);
+
+function handleRegisterSubmit(e) {
+    e.preventDefault();
+
+    if (typeof LoginRadiusSDK !== 'undefined' && LoginRadiusSDK.register) {
+        LoginRadiusSDK.register({
+            email: document.getElementById('reg-email')?.value,
+            password: document.getElementById('reg-password')?.value,
+            firstName: document.getElementById('reg-name')?.value
+        }, function(response) {
+            alert('Conta criada com sucesso!');
+            window.location.href = 'login.html';
+        }, function(error) {
+            alert(error.Description || 'Erro no cadastro');
+        });
+    } else {
+        alert('Register SDK não disponível.');
+    }
+}
+
+var _registerForm = document.getElementById('register-form');
+if (_registerForm) _registerForm.addEventListener('submit', handleRegisterSubmit);
+
+/* Bloqueio do CTA 'Agendar agora' - mostra modal se usuário não autenticado */
+function requireLoginForAgendar() {
+    var cta = document.querySelector('.hero .cta-agendar');
+    if (!cta) return;
+
+    cta.addEventListener('click', function(e) {
+        var token = localStorage.getItem('token');
+        if (!token) {
+            e.preventDefault();
+            // calcula destino (path) e abre modal com parâmetro next
+            var href = cta.getAttribute('href') || '';
+            var next = href.startsWith('http') ? href : (href.startsWith('/') ? href : '/' + href);
+            showLoginModal(next);
+        }
     });
-});
+}
 
-document.getElementById('login-form')?.addEventListener('submit', e => {
-    e.preventDefault();
+/* Modal: mostrar / ocultar com handlers de backdrop e Esc */
+var _backdropHandler = null;
+var _escHandler = null;
 
-    const email = document.getElementById('login-email').value;
-    const password = document.getElementById('login-password').value;
+function showLoginModal(nextUrl) {
+    var modal = document.getElementById('login-modal');
+    if (!modal) return;
+    modal.classList.add('modal-open');
+    modal.setAttribute('aria-hidden', 'false');
 
-    LoginRadiusSDK.login(
-        {
-            email,
-            password
-        },
-        response => {
-            console.log("Login OK", response);
-            localStorage.setItem("token", response.access_token);
-            window.location.href = "/dashboard.html";
-        },
-        error => {
-            alert(error.Description || "Erro no login");
-        }
-    );
-});
+    var loginBtn = document.getElementById('modal-login-btn');
+    var cancelBtn = document.getElementById('modal-cancel-btn');
+    var backdrop = modal.querySelector('.modal-backdrop');
 
-document.getElementById('register-form')?.addEventListener('submit', e => {
-    e.preventDefault();
+    function onLogin() { window.location.href = 'functions/login.html?next=' + encodeURIComponent(nextUrl || '/'); }
+    function onCancel() { hideLoginModal(); }
 
-    LoginRadiusSDK.register(
-        {
-            email: document.getElementById('reg-email').value,
-            password: document.getElementById('reg-password').value,
-            firstName: document.getElementById('reg-name').value
-        },
-        response => {
-            alert("Conta criada com sucesso!");
-            window.location.href = "login.html";
-        },
-        error => {
-            alert(error.Description || "Erro no cadastro");
-        }
-    );
-});
+    if (loginBtn) loginBtn.addEventListener('click', onLogin, { once: true });
+    if (cancelBtn) cancelBtn.addEventListener('click', onCancel, { once: true });
+
+    // backdrop click closes
+    _backdropHandler = function() { hideLoginModal(); };
+    if (backdrop) backdrop.addEventListener('click', _backdropHandler);
+
+    // Esc key closes
+    _escHandler = function(e) { if (e.key === 'Escape') hideLoginModal(); };
+    document.addEventListener('keydown', _escHandler);
+}
+
+function hideLoginModal() {
+    var modal = document.getElementById('login-modal');
+    if (!modal) return;
+    modal.classList.remove('modal-open');
+    modal.setAttribute('aria-hidden', 'true');
+
+    var backdrop = modal.querySelector('.modal-backdrop');
+    if (backdrop && _backdropHandler) {
+        backdrop.removeEventListener('click', _backdropHandler);
+        _backdropHandler = null;
+    }
+    if (_escHandler) {
+        document.removeEventListener('keydown', _escHandler);
+        _escHandler = null;
+    }
+}

@@ -77,19 +77,19 @@
     </footer>
 
 
+    <!-- Modal de login (aparece quando usuário tenta agendar sem estar autenticado) -->
+    <div id="login-modal" class="modal-root" aria-hidden="true">
+        <div class="modal-backdrop"></div>
+        <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+            <h3 id="modal-title">Atenção</h3>
+            <p>Você precisa estar logado para agendar um horário.</p>
+            <div class="modal-actions">
+                <button id="modal-login-btn" class="cta-agendar">Entrar</button>
+                <button id="modal-cancel-btn" class="icon-btn">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
 </body>
 
 </html>
-
-<!-- Modal de login (aparece quando usuário tenta agendar sem estar autenticado) -->
-<div id="login-modal" class="modal-hidden" aria-hidden="true">
-    <div class="modal-backdrop"></div>
-    <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-        <h3 id="modal-title">Atenção</h3>
-        <p>Você precisa estar logado para agendar um horário.</p>
-        <div class="modal-actions">
-            <button id="modal-login-btn" class="cta-agendar">Entrar</button>
-            <button id="modal-cancel-btn" class="icon-btn">Cancelar</button>
-        </div>
-    </div>
-</div>
