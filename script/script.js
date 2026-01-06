@@ -35,3 +35,44 @@ loginRadiusV2.util.ready(function() {
         v2Flows: true
     });
 });
+
+document.getElementById('login-form')?.addEventListener('submit', e => {
+    e.preventDefault();
+
+    const email = document.getElementById('login-email').value;
+    const password = document.getElementById('login-password').value;
+
+    LoginRadiusSDK.login(
+        {
+            email,
+            password
+        },
+        response => {
+            console.log("Login OK", response);
+            localStorage.setItem("token", response.access_token);
+            window.location.href = "/dashboard.html";
+        },
+        error => {
+            alert(error.Description || "Erro no login");
+        }
+    );
+});
+
+document.getElementById('register-form')?.addEventListener('submit', e => {
+    e.preventDefault();
+
+    LoginRadiusSDK.register(
+        {
+            email: document.getElementById('reg-email').value,
+            password: document.getElementById('reg-password').value,
+            firstName: document.getElementById('reg-name').value
+        },
+        response => {
+            alert("Conta criada com sucesso!");
+            window.location.href = "login.html";
+        },
+        error => {
+            alert(error.Description || "Erro no cadastro");
+        }
+    );
+});

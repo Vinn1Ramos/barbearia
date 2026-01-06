@@ -1,56 +1,31 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Login / Cadastro - Ramos Barbearia</title>
-    <link rel="stylesheet" href="../style/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="auth.css">
 </head>
 <body>
-    <header>
-        <nav id="navbar">
-            <img src="../img/logo.png" alt="Ramos Barbearia" class="logo-nav">
-            <ul>
-                <li><a href="../index.html">Home</a></li>
-            </ul>
-            <a href="../index.html" class="btn-agendar">Voltar</a>
-        </nav>
-    </header>
 
-    <main class="auth-container">
-        <h1>Login / Cadastro</h1>
-        <p>Faça login ou crie uma conta para gerenciar seus agendamentos.</p>
+<div class="auth-container">
+    <form class="auth-card" id="login-form">
+        <h2>Entrar</h2>
 
-        <div class="auth-panel">
-            <div class="auth-box" style="max-width:560px;margin:0 auto;">
-                <h2>Entrar</h2>
-                <form id="form-login">
-                    <label for="login-email">E-mail ou telefone</label>
-                    <input id="login-email" name="login-email" type="text" required>
+        <label>Email</label>
+        <input type="email" id="login-email" required>
 
-                    <label for="login-senha">Senha</label>
-                    <input id="login-senha" name="login-senha" type="password" required>
+        <label>Senha</label>
+        <input type="password" id="login-password" required>
 
-                    <div class="auth-actions">
-                        <button type="submit" class="cta-button">Entrar</button>
-                        <a href="cadastro.html" style="color:var(--red);margin-left:8px;align-self:center;">Criar conta</a>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </main>
+        <button type="submit">Entrar</button>
 
-    <footer style="padding:20px;text-align:center;border-top:1px solid #222;">
-        <p>&copy; 2024 Ramos Barbearia</p>
-    </footer>
+        <p class="link">
+            Não tem conta? <a href="register.html">Registrar</a>
+        </p>
+    </form>
+</div>
 
-    <script>
-        // Submissão mock — apenas demonstrativo
-        document.getElementById('form-login').addEventListener('submit', function(e){
-            e.preventDefault();
-            alert('Login (simulado): dados recebidos.');
-        });
-    </script>
+<script src="https://auth.lrcontent.com/v2/js/LoginRadiusV2.js"></script>
+<script src="auth.js"></script>
 </body>
 </html>
