@@ -9,6 +9,7 @@ window.addEventListener('scroll', function() {
 });
 
 function abrirAgendamento() {
-    alert("Redirecionando para o sistema de agendamento...");
-    // Aqui você pode colocar o link do WhatsApp ou abrir um formulário
+    // Abre o chat do WhatsApp em nova aba com mensagem pré-preenchida
+    const waUrl = "https://wa.me/5132472310?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20um%20hor%C3%A1rio%20na%20Ramos%20Barbearia.%20Meu%20nome%20%3A%20%5Bseu%20nome%5D.";
+    window.open(waUrl, '_blank');
 }
