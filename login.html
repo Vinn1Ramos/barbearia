@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Login / Cadastro - Ramos Barbearia</title>
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav id="navbar">
+            <img src="logo.png" alt="Ramos Barbearia" class="logo-nav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+            </ul>
+            <a href="index.html" class="btn-agendar">Voltar</a>
+        </nav>
+    </header>
+
+    <main class="auth-container">
+        <h1>Login / Cadastro</h1>
+        <p>Faça login ou crie uma conta para gerenciar seus agendamentos.</p>
+
+        <div class="auth-panel">
+            <div class="auth-box">
+                <h2>Entrar</h2>
+                <form id="form-login">
+                    <label for="login-email">E-mail ou telefone</label>
+                    <input id="login-email" name="login-email" type="text" required>
+
+                    <label for="login-senha">Senha</label>
+                    <input id="login-senha" name="login-senha" type="password" required>
+
+                    <div class="auth-actions">
+                        <button type="submit" class="cta-button">Entrar</button>
+                        <a href="#" style="color:var(--red);margin-left:8px;align-self:center;">Esqueci a senha</a>
+                    </div>
+                </form>
+            </div>
+
+            <div class="auth-box">
+                <h2>Cadastrar</h2>
+                <form id="form-cadastro">
+                    <label for="cad-nome">Nome completo</label>
+                    <input id="cad-nome" name="cad-nome" type="text" required>
+
+                    <label for="cad-telefone">Telefone</label>
+                    <input id="cad-telefone" name="cad-telefone" type="tel" required>
+
+                    <label for="cad-email">E-mail</label>
+                    <input id="cad-email" name="cad-email" type="email" required>
+
+                    <label for="cad-senha">Senha</label>
+                    <input id="cad-senha" name="cad-senha" type="password" required>
+
+                    <div class="auth-actions">
+                        <button type="submit" class="cta-button">Criar conta</button>
+                    </div>
+                </form>
+                <div class="auth-switch">Ou <a href="https://wa.me/5132472310?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20um%20hor%C3%A1rio.%20">agendar via WhatsApp</a></div>
+            </div>
+        </div>
+    </main>
+
+    <footer style="padding:20px;text-align:center;border-top:1px solid #222;">
+        <p>&copy; 2024 Ramos Barbearia</p>
+    </footer>
+
+    <script>
+        // Submissões mock — apenas demonstrativo
+        document.getElementById('form-login').addEventListener('submit', function(e){
+            e.preventDefault();
+            alert('Login (simulado): dados recebidos.');
+        });
+        document.getElementById('form-cadastro').addEventListener('submit', function(e){
+            e.preventDefault();
+            alert('Cadastro (simulado): conta criada (mock).');
+        });
+    </script>
+</body>
+</html>
