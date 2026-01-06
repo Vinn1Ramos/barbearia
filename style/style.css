@@ -189,52 +189,47 @@ footer {
     transition: background 250ms ease;
 }
 
-/* Panel */
+/* 1. O PAINEL (Obrigatório ter position: relative) */
 .modal-panel {
-    position: relative;
+    position: relative; /* Isso "prende" o X aqui dentro */
     z-index: 1501;
     background: #111;
     color: #fff;
-    padding: 22px;
+    padding: 30px; /* Aumentei um pouco para não sufocar o texto */
     border-radius: 8px;
-    width: 320px;
-    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.6);
+    width: 90%;
+    max-width: 320px;
     border: 1px solid #222;
-    transform: translateY(-8px) scale(0.995);
-    opacity: 0;
-    transition: transform 220ms ease, opacity 220ms ease;
-    will-change: transform, opacity;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
-/* --- Modal: X (fechar) e botão Entrar menor e mais à direita --- */
-
-/* posicione o X no topo-direito do painel */
+/* 2. O BOTÃO "X" (Reajustado e mais fácil de clicar) */
 .modal-close {
     position: absolute;
-    top: 10px;
-    right: 10px;
-    background: transparent;
+    top: 12px;     /* Distância do topo */
+    right: 12px;   /* Distância da direita */
+    
+    /* Estilo do botão */
     border: none;
-    color: #fff;
-    font-size: 20px;
-    line-height: 1;
+    color: #888;       /* Cor mais suave, muda no hover */
+    font-size: 30px;   /* X um pouco maior */
     cursor: pointer;
-    padding: 6px;
-    border-radius: 6px;
-    z-index: 1600;
+    line-height: 1;
+    padding: 5px;      /* Área de clique maior */
+    transition: color 0.2s, transform 0.2s;
 }
 
+/* Efeito ao passar o mouse */
 .modal-close:hover {
-    background: rgba(255, 255, 255, 0.04);
+    color: #ff0000;       /* Fica branco */
+    transform: scale(1.5); /* Dá um leve zoom */
+    transition: color 0.2s, transform 0.2s;
 }
-
 /* botão Entrar — variação menor (classe .small) */
 .modal-login.small {
     position: absolute;
     right: 10px;
-    /* mais para a direita */
     bottom: 10px;
-    /* fixo no canto inferior direito do painel */
     padding: 6px 10px;
     font-size: 0.85rem;
     background: #1ebe57;
@@ -242,17 +237,7 @@ footer {
     border: none;
     border-radius: 6px;
     cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-.modal-login.small:hover {
-    filter: brightness(.98);
-    transform: translateY(-1px);
-}
-
-/* garante que modal seja clicável quando aberto */
-.modal-root.modal-open {
-    pointer-events: auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.473);
 }
 
 .modal-panel,
