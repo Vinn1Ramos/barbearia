@@ -170,3 +170,19 @@ footer { padding: 20px; text-align: center; border-top: 1px solid #222; font-siz
 #logonome {
     max-width: 150px;
 }
+
+#logowhats{
+    max-width: 40px;
+    transition: max-width 0.3s ease, opacity 0.3s ease;
+
+}
+#logowhats:hover{
+    cursor: pointer;
+    opacity: 0.8;
+    max-width: 55px;
+}
+
+#buttonwhats{
+    background-color: transparent;
+    border: none;
+}
