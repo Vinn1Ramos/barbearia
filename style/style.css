@@ -50,7 +50,7 @@ nav ul li a {
 nav ul li a:hover { color: var(--red); }
 
 /* Botão AGENDAR (estilo WhatsApp) */
-.btn-agendar {
+.btn-whatsapp {
     background-color: #25D366; /* Verde WhatsApp */
     color: var(--white);
     border: none;
@@ -61,7 +61,7 @@ nav ul li a:hover { color: var(--red); }
     transition: transform 0.2s ease, background-color 0.2s ease;
     display: inline-block;
 }
-.btn-agendar:hover {
+.btn-whatsapp:hover {
     transform: scale(1.05);
     background-color: #1ebe57;
 }
