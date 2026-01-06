@@ -58,7 +58,7 @@ function handleLoginSubmit(e) {
             localStorage.setItem('token', response.access_token);
             // redireciona para `next` se presente na query string
             var params = new URLSearchParams(window.location.search);
-            var next = params.get('next');
+            try { delete document.getElementById('login-modal').dataset.next; } catch(e) {}
             if (next) {
                 try { window.location.href = decodeURIComponent(next); }
                 catch (e) { window.location.href = next; }
@@ -114,32 +114,31 @@ function requireLoginForAgendar() {
         }
     });
 }
-/* declarar handlers uma vez no escopo do arquivo */
+
+/* handlers armazenados no escopo do arquivo */
 var _backdropHandler = null;
 var _escHandler = null;
 
 function showLoginModal(nextUrl) {
     var modal = document.getElementById('login-modal');
+    modal.dataset.next = nextUrl || '/';
     if (!modal) return;
     modal.classList.add('modal-open');
     modal.setAttribute('aria-hidden', 'false');
-
     var loginBtn = document.getElementById('modal-login-btn');
-    var cancelBtn = document.getElementById('modal-cancel-btn');
+    var closeBtn = document.getElementById('modal-close-btn');
     var backdrop = modal.querySelector('.modal-backdrop');
-
-    function onLogin() { window.location.href = 'functions/login.html?next=' + encodeURIComponent(nextUrl || '/'); }
-    function onCancel() { hideLoginModal(); }
-
+    function onLogin() {
+        window.location.href = 'functions/login.html?next=' + encodeURIComponent(nextUrl || '/');
+    }
+    function onClose() {
+        hideLoginModal();
+    }
     if (loginBtn) loginBtn.addEventListener('click', onLogin, { once: true });
-    if (cancelBtn) cancelBtn.addEventListener('click', onCancel, { once: true });
-
-    // backdrop click fecha
-    _backdropHandler = function() { hideLoginModal(); };
+    if (closeBtn) closeBtn.addEventListener('click', onClose, { once: true });
+    _backdropHandler = function () { hideLoginModal(); };
     if (backdrop) backdrop.addEventListener('click', _backdropHandler);
-
-    // Esc key fecha
-    _escHandler = function(e) { if (e.key === 'Escape') hideLoginModal(); };
+    _escHandler = function (e) { if (e.key === 'Escape') hideLoginModal(); };
     document.addEventListener('keydown', _escHandler);
 }
 
@@ -155,27 +154,36 @@ function hideLoginModal() {
         _backdropHandler = null;
     }
     if (_escHandler) {
+        // remover somente o listener correto
         document.removeEventListener('keydown', _escHandler);
         _escHandler = null;
     }
 }
 
-/* Recuperação: limpa estados inconsistentes do modal caso algo tenha permanecido marcado */
-function fixModalState() {
-    try {
-        var modal = document.getElementById('login-modal');
-        if (!modal) {
-            document.body.classList.remove('modal-active');
-            return;
-        }
-        // se body está bloqueando mas o modal não está aberto, limpa
-        if (!modal.classList.contains('modal-open') && document.body.classList.contains('modal-active')) {
-            document.body.classList.remove('modal-active');
-        }
-    } catch (e) {
-        // não bloquear execução por erro inesperado
-        document.body.classList.remove('modal-active');
-    }
-}
+// Delegação de clique para fechar/entrar no modal (fallback robusto)
+document.addEventListener('click', function(e) {
+  var target = e.target;
 
-document.addEventListener('DOMContentLoaded', fixModalState);
+  // fecha se clicou no X ou em elemento com classe .modal-close (ou botão cancelar)
+  if (target.closest && (target.closest('#modal-close-btn') || target.closest('.modal-close') || target.closest('#modal-cancel-btn'))) {
+    e.preventDefault();
+    try { hideLoginModal(); } catch (err) { console.warn('hideLoginModal falhou', err); }
+    return;
+  }
+
+  // fecha se clicou no backdrop
+  if (target.closest && target.closest('.modal-backdrop')) {
+    e.preventDefault();
+    try { hideLoginModal(); } catch (err) { console.warn('hideLoginModal falhou', err); }
+    return;
+  }
+
+  // Entrar — usa o data-next gravado no modal
+  if (target.closest && target.closest('#modal-login-btn')) {
+    e.preventDefault();
+    var modal = document.getElementById('login-modal');
+    var next = (modal && modal.dataset && modal.dataset.next) ? modal.dataset.next : '/';
+    window.location.href = 'functions/login.html?next=' + encodeURIComponent(next);
+    return;
+  }
+});

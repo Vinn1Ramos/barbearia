@@ -49,6 +49,19 @@
         </div>
     </section>
 
+        <!-- Modal de aviso (login required) -->
+    <div id="login-modal" class="modal-root" aria-hidden="true">
+        <div class="modal-backdrop"></div>
+        <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+            <button id="modal-close-btn" class="modal-close" aria-label="Fechar">&times;</button>
+            <h3 id="modal-title">Atenção</h3>
+            <p>Você precisa estar logado para agendar um horário.</p>
+            <div class="modal-actions">
+                <button id="modal-login-btn" class="cta-agendar modal-login small">Entrar</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Seção de serviços: cartões com os serviços oferecidos -->
     <section id="servicos" class="services">
         <h2>NOSSOS SERVIÇOS</h2>
@@ -76,20 +89,8 @@
         <p>&copy; 2024 Ramos Barbearia - Todos os direitos reservados.</p>
     </footer>
 
-
-    <!-- Modal de login (aparece quando usuário tenta agendar sem estar autenticado) -->
-    <div id="login-modal" class="modal-root" aria-hidden="true">
-        <div class="modal-backdrop"></div>
-        <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-            <h3 id="modal-title">Atenção</h3>
-            <p>Você precisa estar logado para agendar um horário.</p>
-            <div class="modal-actions">
-                <button id="modal-login-btn" class="cta-agendar">Entrar</button>
-                <button id="modal-cancel-btn" class="icon-btn">Cancelar</button>
-            </div>
-        </div>
-    </div>
-
 </body>
+</html>
+
 
 </html>

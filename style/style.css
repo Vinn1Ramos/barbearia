@@ -167,33 +167,157 @@ footer {
    Estilo alinhado com o visual do site
    ------------------ */
 
+/* Modal: não bloquear a página quando fechado */
 .modal-root {
-        position: fixed; inset: 0; z-index: 1500; display: flex; align-items: center; justify-content: center;
-        pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+/* Quando fechado: invisível e sem interceptar eventos */
+  visibility: hidden;
+  pointer-events: none;
 }
 
 /* Backdrop */
 .modal-backdrop {
-        position: absolute; inset: 0; background: rgba(0,0,0,0.0); transition: background 250ms ease; will-change: background;
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.0); /*transparente por padrão*/
+    transition: background 250ms ease;
 }
 
 /* Panel */
 .modal-panel {
-        position: relative; z-index: 1501; background: #111; color: #fff; padding: 22px; border-radius: 8px; width: 320px;
-        box-shadow: 0 6px 30px rgba(0,0,0,0.6); border: 1px solid #222;
-        transform: translateY(-8px) scale(0.995); opacity: 0; transition: transform 220ms ease, opacity 220ms ease; will-change: transform, opacity;
+    position: relative;
+    z-index: 1501;
+    background: #111;
+    color: #fff;
+    padding: 22px;
+    border-radius: 8px;
+    width: 320px;
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.6);
+    border: 1px solid #222;
+    transform: translateY(-8px) scale(0.995);
+    opacity: 0;
+    transition: transform 220ms ease, opacity 220ms ease;
+    will-change: transform, opacity;
 }
 
-.modal-panel h3 { margin: 0 0 8px 0; font-size: 1.1rem; }
-.modal-panel p { margin: 0 0 14px 0; font-size: 0.95rem; color: #ddd; }
-.modal-actions { display:flex; gap:10px; justify-content:flex-end; }
-.modal-actions .cta-agendar { padding: 8px 16px; font-size: 0.95rem; border-radius:6px; }
-.modal-actions .icon-btn { padding: 8px 12px; background: transparent; border: 1px solid rgba(255,255,255,0.06); color: #fff; border-radius:6px; }
+/* --- Modal: X (fechar) e botão Entrar menor e mais à direita --- */
+
+/* posicione o X no topo-direito do painel */
+.modal-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 6px;
+    z-index: 1600;
+}
+
+.modal-close:hover {
+    background: rgba(255, 255, 255, 0.04);
+}
+
+/* botão Entrar — variação menor (classe .small) */
+.modal-login.small {
+    position: absolute;
+    right: 10px;
+    /* mais para a direita */
+    bottom: 10px;
+    /* fixo no canto inferior direito do painel */
+    padding: 6px 10px;
+    font-size: 0.85rem;
+    background: #1ebe57;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.modal-login.small:hover {
+    filter: brightness(.98);
+    transform: translateY(-1px);
+}
+
+/* garante que modal seja clicável quando aberto */
+.modal-root.modal-open {
+    pointer-events: auto;
+}
+
+.modal-panel,
+.modal-panel * {
+    pointer-events: auto;
+}
+
+/* (mantém backdrop/panel com z-index corretos) */
+.modal-backdrop {
+    position: absolute;
+    inset: 0;
+    z-index: 1500;
+}
+
+.modal-panel {
+    position: relative;
+    z-index: 1501;
+    padding-bottom: 56px;
+    /* espaço para o botão absoluto */
+}
+
+.modal-panel h3 {
+    margin: 0 0 8px 0;
+    font-size: 1.1rem;
+}
+
+.modal-panel p {
+    margin: 0 0 14px 0;
+    font-size: 0.95rem;
+    color: #ddd;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.modal-actions .cta-agendar {
+    padding: 8px 16px;
+    font-size: 0.95rem;
+    border-radius: 6px;
+}
+
+.modal-actions .icon-btn {
+    padding: 8px 12px;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    color: #fff;
+    border-radius: 6px;
+}
 
 /* Visible state */
-.modal-open { pointer-events: auto; }
-.modal-open .modal-backdrop { background: rgba(0,0,0,0.6); }
-.modal-open .modal-panel { transform: translateY(0) scale(1); opacity: 1; }
+.modal-open {
+    pointer-events: auto;
+}
+
+.modal-open .modal-backdrop {
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.modal-open .modal-panel {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+}
 
 /* ------------------
    Botões-ícone (header)
