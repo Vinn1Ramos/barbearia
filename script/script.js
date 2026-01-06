@@ -115,19 +115,18 @@ function requireLoginForAgendar() {
     });
 }
 
-/* garantir variáveis de handler no escopo global do arquivo (uma vez) */
+/* declarar handlers uma vez no escopo do arquivo */
 var _backdropHandler = null;
 var _escHandler = null;
 
-/* Atualize showLoginModal para também ativar/desativar o blur da página */
+/* Ao abrir o modal: adiciona classes no modal e no body (ativa desfoque) */
 function showLoginModal(nextUrl) {
   var modal = document.getElementById('login-modal');
   if (!modal) return;
-  modal.classList.add('modal-open');
+  modal.classList.add('modal-open');             // habilita pointer-events no modal
   modal.setAttribute('aria-hidden', 'false');
 
-  /* adiciona classe no body pra aplicar o blur via CSS */
-  document.body.classList.add('modal-active');
+  document.body.classList.add('modal-active');   // aplica o blur na página
 
   var loginBtn = document.getElementById('modal-login-btn');
   var closeBtn = document.getElementById('modal-close-btn');
@@ -146,14 +145,14 @@ function showLoginModal(nextUrl) {
   document.addEventListener('keydown', _escHandler);
 }
 
+/* Ao fechar: remove classes e listeners */
 function hideLoginModal() {
   var modal = document.getElementById('login-modal');
   if (!modal) return;
   modal.classList.remove('modal-open');
   modal.setAttribute('aria-hidden', 'true');
 
-  /* remove o blur/lock da página */
-  document.body.classList.remove('modal-active');
+  document.body.classList.remove('modal-active'); // remove blur
 
   var backdrop = modal.querySelector('.modal-backdrop');
   if (backdrop && _backdropHandler) {

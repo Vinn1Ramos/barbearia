@@ -167,32 +167,31 @@ footer {
    Estilo alinhado com o visual do site
    ------------------ */
 
- /* Permitir eventos quando o modal estiver aberto */
+/* Garanta que o modal permita cliques quando aberto */
 .modal-root.modal-open { pointer-events: auto; }
 
-/* Garantir ordem de empilhamento correta */
-.modal-backdrop { position: absolute; inset: 0; z-index: 1500; }
-.modal-panel { position: relative; z-index: 1501; }
+/* Força filhos do painel a receberem eventos (evita overlay bloqueando os botões) */
+.modal-panel, .modal-panel * { pointer-events: auto; }
 
-/*  Botão Entrar*/
+/* Botão Entrar menor e discreto no canto inferior direito */
 .modal-login {
   position: absolute;
   right: 12px;
   bottom: 12px;
   padding: 6px 10px;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   background: #1ebe57;
   color: #fff;
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.20);
 }
 .modal-login:hover { filter: brightness(.95); transform: translateY(-1px); }
 
-/* Close X:  */
+/* Close X: garantir clique e destaque sutil */
 .modal-close {
-  z-index: 1510; /* acima do painel para garantir clique em edge cases */
+  z-index: 1510;
   padding: 6px 8px;
   font-size: 18px;
   background: transparent;
@@ -202,9 +201,9 @@ footer {
 }
 .modal-close:hover { background: rgba(255,255,255,0.03); }
 
-/* Desfoque/escurecer o resto da página enquanto o modal estiver aberto */
+/* Desfoque da página enquanto o modal estiver ativo */
 body.modal-active > :not(#login-modal) {
-  filter: blur(4px) brightness(.8);
+  filter: blur(4px) brightness(.82);
   transition: filter 200ms ease;
   pointer-events: none;
   user-select: none;
