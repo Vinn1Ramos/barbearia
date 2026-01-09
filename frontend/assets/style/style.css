@@ -63,22 +63,30 @@ nav ul li a:hover {
     color: var(--accent-red);
 }
 
-/* Container dos controles (login / whatsapp) no cabeçalho */
-.header-controls {
+/* =====================
+   Logos do Header
+===================== */
+.imagens {
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
-/* Marcas (logos) */
 #brand-logo {
-    max-width: 100px;
-    margin-left: 20px;
+    max-width: 80px;
 }
 
 #brand-name {
-    max-width: 150px;
+    max-width: 140px;
 }
+
+/* Mobile: esconder nome se necessário */
+@media (max-width: 600px) {
+    #brand-name {
+        display: none;
+    }
+}
+
 
 /* ------------------
    Hero (seção principal)
@@ -304,50 +312,72 @@ footer {
     opacity: 1;
 }
 
-/* ------------------
-   Botões-ícone (header)
-   ------------------ */
+/* =========================
+   Ícones do Header (Login / WhatsApp)
+========================= */
+
+.icon-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    background: transparent;
+    border: none;               /* remove qualquer borda */
+    padding: 6px;               /* área de clique confortável */
+    cursor: pointer;
+
+    transition: 
+        transform 0.25s ease,
+        color 0.25s ease,
+        filter 0.25s ease;
+}
+
+/* =========================
+   Ícones do Header
+========================= */
 .icon-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     background: transparent;
-    color: var(--white);
-    margin-left: 20px;
+    border: none;
+    padding: 6px;
+    cursor: pointer;
     text-decoration: none;
-    transition: transform .12s;
+    transition:
+        transform 0.25s ease,
+        color 0.25s ease;
 }
 
+/* Animação padrão */
 .icon-btn:hover {
-    transform: translateY(-2px);
-    background: rgba(255, 255, 255, 0.03);
+    transform: translateY(-2px) scale(1.15);
 }
 
-.btn-login {
-    width: 30px;
-    height: 30px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-}
-
+/* =========================
+   LOGIN
+========================= */
 .btn-login i {
-    font-size: 30px;
-    line-height: 30px;
+    font-size: 26px;
+    color: #ffffff;
+    transition: color 0.25s ease;
 }
 
-.btn-whatsapp {
-    width: 30px;
-    height: 30px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+.btn-login:hover i {
+    color: var(--accent-red);
 }
 
-.btn-whatsapp img {
-    width: 30px;
-    height: 30px;
-    display: block;
+/* =========================
+   WHATSAPP
+========================= */
+.btn-whatsapp i {
+    font-size: 28px;
+    color: #ffffff; /* branco padrão */
+    transition: color 0.25s ease;
+}
+
+.btn-whatsapp:hover i {
+    color: #25D366; /* verde oficial WhatsApp */
 }
 
 /* ------------------

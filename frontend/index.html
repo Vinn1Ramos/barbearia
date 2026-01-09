@@ -4,90 +4,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ramos Barbearia | Tradição e Estilo</title>
+    <title>Ramos Barbearia</title>
+
+    <!-- CSS principal -->
     <link rel="stylesheet" href="assets/style/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <script src="assets/js/script.js"></script>
+
+    <!-- Ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
 
-    <!-- Arquivo: index.html — Página principal estática (header, hero, serviços, footer) -->
-    <!-- Cabeçalho: logo, navegação e controles (login/whatsapp) -->
+    <!-- ================= HEADER ================= -->
     <header>
-        <nav id="navbar">
-            <div class="imagens">
-                <!-- Marca principal (logo) -->
-                <img src="assets/img/logo.png" alt="logo barbearia" id="brand-logo">
-                <!-- Marca textual (nome em imagem) -->
-                <img src="assets/img/Captura_de_tela_2026-01-05_233355-removebg-preview.png" alt="logo nome" id="brand-name">
-            </div>
-            <!-- Links principais do site -->
+        <nav>
+            <img src="assets/img/logo.png" alt="Ramos Barbearia" id="brand-logo">
+
             <ul>
-                <li><a href="#home">Home</a></li>
+                <li><a href="#hero">Início</a></li>
                 <li><a href="#servicos">Serviços</a></li>
-                <li><a href="#contato">Contato</a></li>
             </ul>
-            <!-- Controles do cabeçalho: botões de ação (login, whatsapp) -->
+
             <div class="header-controls">
-                <a href="pages/login.html" class="icon-btn btn-login" title="Entrar" aria-label="Entrar"><i
-                        class="fas fa-user"></i></a>
-                <a href="https://wa.me/5132472310?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20um%20hor%C3%A1rio%20na%20Ramos%20Barbearia.%20"
-                    class="icon-btn btn-whatsapp" title="WhatsApp" aria-label="WhatsApp" target="_blank"
-                    rel="noopener noreferrer"><img src="assets/img/whatsapp.png" alt="WhatsApp"></a>
+                
+                <!-- WhatsApp -->
+                <a href="https://wa.me/5132472310" class="icon-btn btn-whatsapp" target="_blank" aria-label="WhatsApp">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </a>
+
+                <!-- Login / Logout -->
+                <button id="auth-btn" class="icon-btn btn-login" title="Entrar">
+                    <i class="fa-solid fa-user"></i>
+                </button>
             </div>
         </nav>
     </header>
 
-    <section id="home" class="hero">
+    <!-- ================= HERO ================= -->
+    <section class="hero" id="hero">
         <div class="hero-content">
-            <!-- Título principal da hero -->
             <h1>RAMOS <span class="text-red">BARBEARIA</span></h1>
-            <p>Onde a tradição encontra o seu melhor estilo.</p>
-            <!-- CTA principal: agendamento -->
-            <a href="pages/agendamento.html" class="cta-agendar">AGENDAR AGORA</a>
+            <p>Estilo, tradição e atitude</p>
+
+            <a href="pages/agendamento.html" class="cta-agendar">
+                AGENDAR AGORA
+            </a>
         </div>
     </section>
 
-    <!-- Seção de serviços: cartões com os serviços oferecidos -->
-    <section id="servicos" class="services">
-        <h2>NOSSOS SERVIÇOS</h2>
-        <div class="services-grid">
-            <div class="service-card">
-                <i class="fas fa-cut"></i>
-                <h3>Corte Clássico</h3>
-                <p>O acabamento perfeito para o seu dia a dia.</p>
-            </div>
-            <div class="service-card">
-                <i class="fas fa-razor"></i>
-                <h3>Barba Terapia</h3>
-                <p>Toalha quente e cuidados especializados.</p>
-            </div>
-            <div class="service-card red-card">
-                <i class="fas fa-comb"></i>
-                <h3>Combo Ramos</h3>
-                <p>Cabelo e barba com desconto especial.</p>
-            </div>
+    <!-- ================= SERVIÇOS ================= -->
+    <section class="services" id="servicos">
+        <h2>Nossos Serviços</h2>
+
+        <div class="services-grid" id="services-grid">
+            <!-- Serviços carregados via JS -->
         </div>
     </section>
 
-    <!-- Rodapé: informações legais e direitos -->
+    <!-- ================= FOOTER ================= -->
     <footer>
         <p>&copy; 2024 Ramos Barbearia - Todos os direitos reservados.</p>
     </footer>
 
-    <!-- Modal de login (aparece quando usuário tenta agendar sem estar autenticado) -->
+    <!-- ================= MODAL LOGIN REQUIRED ================= -->
     <div id="login-modal" class="modal-root" aria-hidden="true">
         <div class="modal-backdrop"></div>
+
         <div class="modal-panel">
-            <button id="modal-close-btn" class="icon-btn modal-close" aria-label="Fechar">&times;</button>
-            <h3 id="modal-title">Atenção</h3>
-            <p>Você precisa estar logado para agendar um horário.</p>
-            <div class="modal-actions">
-                <button id="modal-login-btn" class="cta-agendar">Entrar</button>
-            </div>
+            <button class="modal-close">&times;</button>
+
+            <h3>Login necessário</h3>
+            <p>Você precisa estar logado para realizar um agendamento.</p>
+
+            <button id="modal-login-btn" class="modal-login small">
+                Entrar
+            </button>
         </div>
     </div>
+
+    <!-- JS externo -->
+    <script src="assets/js/script.js" defer></script>
 
 </body>
 
