@@ -11,65 +11,85 @@
 </head>
 
 <body>
+    <!-- =========================
+         HEADER PADRÃO DO SITE
+         - Logo + nome
+         - Menu
+         - Botão de voltar
+    ========================== -->
     <header>
         <nav id="navbar">
             <div class="imagens">
                 <img src="../assets/img/logo.png" alt="logo barbearia" id="brand-logo">
+
                 <img src="../assets/img/Captura_de_tela_2026-01-05_233355-removebg-preview.png" alt="logo nome"
                     id="brand-name">
             </div>
-
             <ul>
                 <li><a href="../index.html">Home</a></li>
                 <li><a href="../index.html#servicos">Serviços</a></li>
                 <li><a href="../index.html#contato">Contato</a></li>
             </ul>
-
             <div class="header-controls">
-                <div class="header-controls">
-                    <a href="../index.html" class="icon-btn btn-voltar" title="Voltar">
-                        <i class="fas fa-arrow-left"></i>
-                    </a>
-
-                    </a>
-                </div>
+                <a href="../index.html" class="icon-btn btn-voltar" title="Voltar" aria-label="Voltar">
+                    <i class="fas fa-arrow-left"></i>
+                </a>
             </div>
         </nav>
     </header>
 
-    <main style="padding:120px 5%;">
+    <!-- =========================
+         CONTEÚDO PRINCIPAL
+         - Página de cadastro
+    ========================== -->
+
+    <main class="auth-page">
         <div class="form-wrapper">
+
             <h1>CRIAR CONTA</h1>
 
+            <!-- Formulário de cadastro -->
             <form id="register-form" novalidate>
+
                 <div class="form-group">
                     <label for="reg-name">Nome Completo:</label>
-                    <input type="text" id="reg-name" required />
+                    <input type="text" id="reg-name" placeholder="Seu nome completo" required />
                 </div>
 
                 <div class="form-group">
                     <label for="reg-email">Email:</label>
-                    <input type="email" id="reg-email" required />
+                    <input type="email" id="reg-email" placeholder="Seu email" required />
                 </div>
 
                 <div class="form-group">
-                    <label for="reg-password">Senha</label>
-                    <input type="password" id="reg-password" required />
+                    <label for="reg-password">Senha:</label>
+                    <input type="password" id="reg-password" placeholder="Sua senha" required />
                 </div>
 
                 <div class="form-group">
-                    <label for="reg-password">Confirmar Senha:</label>
-                    <input type="password" id="reg-password" required />
+                    <label for="reg-password-confirm">Confirmar Senha:</label>
+                    <input type="password" id="reg-password-confirm" placeholder="Confirme sua senha" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="reg-password-confirm">Celular:</label>
+                    <input type="password" id="reg-password-confirm" placeholder="Seu telefone" required />
                 </div>
 
                 <div class="form-actions">
-                    <button type="submit" class="cta-agendar">REGISTRAR</button>
+                    <button type="submit" class="cta-agendar">
+                        REGISTRAR
+                    </button>
                 </div>
+
             </form>
 
+            <!-- Link auxiliar -->
             <p class="form-helper">
-                Já tem conta? <a href="login.html">Entrar</a>
+                Já tem conta?
+                <a href="login.html">Entrar</a>
             </p>
+
         </div>
     </main>
 

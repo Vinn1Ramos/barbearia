@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,71 +8,31 @@
   <link rel="stylesheet" href="../assets/style/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <script src="../assets/js/script.js"></script>
-</head>
-<!DOCTYPE html>
-<html lang="pt-br">
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- Título da página -->
-  <title>Entrar - Ramos Barbearia</title>
-
-  <!-- CSS principal do site (padrão visual unificado) -->
-  <link rel="stylesheet" href="../assets/style/style.css">
-
-  <!-- Ícones (Font Awesome) -->
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-</head>
 
 <body>
-
-  <!-- =========================
-       HEADER
-       - Mantém identidade visual
-       - Inclui botão de voltar
-  ========================== -->
   <header>
     <nav id="navbar">
 
-      <!-- Logos -->
       <div class="imagens">
-        <img src="../assets/img/logo.png"
-             alt="Logo Ramos Barbearia"
-             id="brand-logo">
-
-        <img src="../assets/img/Captura_de_tela_2026-01-05_233355-removebg-preview.png"
-             alt="Ramos Barbearia"
-             id="brand-name">
+        <img src="../assets/img/logo.png" alt="logo barbearia" id="brand-logo">
+        <img src="../assets/img/Captura_de_tela_2026-01-05_233355-removebg-preview.png" alt="logo nome" id="brand-name">
       </div>
 
-      <!-- Menu simples -->
       <ul>
         <li><a href="../index.html">Home</a></li>
         <li><a href="../index.html#servicos">Serviços</a></li>
         <li><a href="../index.html#contato">Contato</a></li>
       </ul>
 
-      <!-- Controle do header: botão de voltar -->
       <div class="header-controls">
-        <a href="../index.html"
-           class="icon-btn btn-voltar"
-           title="Voltar para a página inicial"
-           aria-label="Voltar">
+        <a href="../index.html" class="icon-btn btn-voltar" title="Voltar" aria-label="Voltar">
           <i class="fas fa-arrow-left"></i>
         </a>
       </div>
-
     </nav>
   </header>
 
-  <!-- =========================
-       CONTEÚDO PRINCIPAL
-       - Página de autenticação
-       - Layout controlado via CSS (.auth-page)
-  ========================== -->
   <main class="auth-page">
 
     <!-- Wrapper do formulário (centralização e largura) -->
@@ -87,28 +48,18 @@
         <!-- Campo de email -->
         <div class="form-group">
           <label for="login-email">Email</label>
-          <input type="email"
-                 id="login-email"
-                 placeholder="Seu email"
-                 required>
+          <input type="email" id="login-email" placeholder="Seu email" required>
         </div>
 
         <!-- Campo de senha -->
         <div class="form-group">
           <label for="login-password">Senha</label>
-          <input type="password"
-                 id="login-password"
-                 placeholder="Sua senha"
-                 required>
+          <input type="password" id="login-password" placeholder="Sua senha" required>
         </div>
 
         <!-- Ações do formulário -->
         <div class="form-actions">
-          <button type="submit"
-                  class="cta-agendar"
-                  id="btn-login">
-            Entrar
-          </button>
+          <button type="submit" class="cta-agendar" id="btn-login">Entrar</button>
         </div>
 
       </form>
@@ -118,16 +69,13 @@
         Não tem conta?
         <a href="register.html">Registrar</a>
       </p>
-
     </div>
   </main>
 
-  <!-- =========================
-       RODAPÉ
-  ========================== -->
   <footer>
     <p>&copy; 2024 Ramos Barbearia - Todos os direitos reservados.</p>
   </footer>
-  
+
 </body>
+
 </html>
