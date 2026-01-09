@@ -310,7 +310,6 @@ footer {
     color: #e0e0e0;
 }
 
-
 .modal-actions {
     display: flex;
     gap: 10px;
@@ -359,10 +358,21 @@ footer {
     }
 }
 
-
 /* =========================
    Ícones do Header (Login / WhatsApp)
 ========================= */
+/* força o logout a vir antes do login */
+#logout-btn {
+    order: 3;
+}
+
+#auth-btn {
+    order: 2;
+}
+
+.btn-whatsapp {
+    order: 1;
+}
 
 .icon-btn {
     display: inline-flex;
@@ -384,9 +394,16 @@ footer {
     transform: translateY(-2px) scale(1.15);
 }
 
+.header-controls {
+    display: flex;
+    align-items: center;
+    gap: 16px; /* espaçamento igual entre todos */
+}
+
 /* =========================
    LOGIN
 ========================= */
+
 .btn-login i {
     font-size: 26px;
     color: #ffffff;
@@ -669,3 +686,5 @@ button:disabled,
         padding: 24px 18px;
     }
 }
+
+
