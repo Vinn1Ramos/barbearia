@@ -215,25 +215,36 @@ footer {
 /* 2. O BOTÃO "X" (Reajustado e mais fácil de clicar) */
 .modal-close {
     position: absolute;
-    top: 12px;     /* Distância do topo */
-    right: 12px;   /* Distância da direita */
-    
-    /* Estilo do botão */
+    top: 10px;
+    right: 10px;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.04);
     border: none;
-    color: #888;       /* Cor mais suave, muda no hover */
-    font-size: 30px;   /* X um pouco maior */
+    border-radius: 50%;
+    color: #bbb;
+    font-size: 26px;
     cursor: pointer;
-    line-height: 1;
-    padding: 5px;      /* Área de clique maior */
-    transition: color 0.2s, transform 0.2s;
+    transition:
+        background-color 0.25s ease,
+        color 0.25s ease,
+        transform 0.2s ease;
 }
 
 /* Efeito ao passar o mouse */
 .modal-close:hover {
-    color: #ff0000;       /* Fica branco */
-    transform: scale(1.5); /* Dá um leve zoom */
-    transition: color 0.2s, transform 0.2s;
+    background: rgba(230, 0, 0, 0.15);
+    color: var(--accent-red);
+    transform: scale(1.15);
 }
+
+.modal-close:active {
+    transform: scale(0.95);
+}
+
 /* botão Entrar — variação menor (classe .small) */
 .modal-login.small {
     position: absolute;
@@ -265,19 +276,26 @@ footer {
     position: relative;
     z-index: 1501;
     padding-bottom: 56px;
-    /* espaço para o botão absoluto */
+    max-width: 380px;
+    padding: 32px 28px;
 }
 
 .modal-panel h3 {
-    margin: 0 0 8px 0;
-    font-size: 1.1rem;
+    margin: 0 0 10px 0;
+    font-size: 1.35rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--accent-red);
 }
 
 .modal-panel p {
-    margin: 0 0 14px 0;
-    font-size: 0.95rem;
-    color: #ddd;
+    margin: 0 0 18px 0;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #e0e0e0;
 }
+
 
 .modal-actions {
     display: flex;
@@ -286,10 +304,11 @@ footer {
 }
 
 .modal-actions .cta-agendar {
-    padding: 8px 16px;
-    font-size: 0.95rem;
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 1rem;
     border-radius: 6px;
-    margin-bottom: 10px;
+    text-align: center;
 }
 
 .modal-actions .icon-btn {
@@ -312,7 +331,20 @@ footer {
 .modal-open .modal-panel {
     transform: translateY(0) scale(1);
     opacity: 1;
+    animation: modalPop 0.25s ease-out;
 }
+
+@keyframes modalPop {
+    from {
+        opacity: 0;
+        transform: translateY(10px) scale(0.96);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
 
 /* =========================
    Ícones do Header (Login / WhatsApp)
