@@ -63,22 +63,30 @@ nav ul li a:hover {
     color: var(--accent-red);
 }
 
-/* Container dos controles (login / whatsapp) no cabeçalho */
-.header-controls {
+/* =====================
+   Logos do Header
+===================== */
+.imagens {
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
-/* Marcas (logos) */
 #brand-logo {
-    max-width: 100px;
-    margin-left: 20px;
+    max-width: 80px;
 }
 
 #brand-name {
-    max-width: 150px;
+    max-width: 140px;
 }
+
+/* Mobile: esconder nome se necessário */
+@media (max-width: 600px) {
+    #brand-name {
+        display: none;
+    }
+}
+
 
 /* ------------------
    Hero (seção principal)
@@ -304,50 +312,55 @@ footer {
     opacity: 1;
 }
 
-/* ------------------
-   Botões-ícone (header)
-   ------------------ */
+/* =========================
+   Ícones do Header (Login / WhatsApp)
+========================= */
+
 .icon-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+
     background: transparent;
-    color: var(--white);
-    margin-left: 20px;
+    border: none;               /* remove qualquer borda */
+    padding: 6px;               /* área de clique confortável */
+    cursor: pointer;
     text-decoration: none;
-    transition: transform .12s;
+    transition: 
+        transform 0.25s ease,
+        color 0.25s ease,
+        filter 0.25s ease;
 }
 
+/* Animação padrão */
 .icon-btn:hover {
-    transform: translateY(-2px);
-    background: rgba(255, 255, 255, 0.03);
+    transform: translateY(-2px) scale(1.15);
 }
 
-.btn-login {
-    width: 30px;
-    height: 30px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-}
-
+/* =========================
+   LOGIN
+========================= */
 .btn-login i {
-    font-size: 30px;
-    line-height: 30px;
+    font-size: 26px;
+    color: #ffffff;
+    transition: color 0.25s ease;
 }
 
-.btn-whatsapp {
-    width: 30px;
-    height: 30px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+.btn-login:hover i {
+    color: var(--accent-red);
 }
 
-.btn-whatsapp img {
-    width: 30px;
-    height: 30px;
-    display: block;
+/* =========================
+   WHATSAPP
+========================= */
+.btn-whatsapp i {
+    font-size: 28px;
+    color: #ffffff; /* branco padrão */
+    transition: color 0.25s ease;
+}
+
+.btn-whatsapp:hover i {
+    color: #25D366; /* verde oficial WhatsApp */
 }
 
 /* ------------------
@@ -359,6 +372,7 @@ footer {
     padding: 40px 20px;
 }
 
+
 .auth-panel {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -366,7 +380,7 @@ footer {
 }
 
 .auth-box {
-    background: var(--dark-grey);
+    background: #111;
     padding: 24px;
     border: 1px solid #222;
     border-radius: 8px;
@@ -383,6 +397,18 @@ footer {
     color: #fff;
 }
 
+/* ===============================
+   UX — ESTADOS DE BOTÕES
+   (ADIÇÃO SEGURA — NÃO CONFLITA)
+   =============================== */
+
+button:disabled,
+.cta-agendar.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
 @media (max-width:800px) {
     .auth-panel {
         grid-template-columns: 1fr
@@ -391,4 +417,80 @@ footer {
     nav ul {
         display: none
     }
+}
+
+/* ===============================
+   FORMULÁRIOS — PADRÃO GLOBAL
+   (Login / Register / Agendamento)
+   =============================== */
+
+.form-wrapper {
+    max-width: 500px;
+    margin: 140px auto 60px;
+    padding: 30px;
+    background: #111; /* igual modais e inputs */
+    border: 1px solid #222;
+    border-radius: 8px;
+}
+
+.form-wrapper h1,
+.form-wrapper h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 0.9rem;
+    color: #ddd;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    background: #111;
+    border: 1px solid #333;
+    border-radius: 4px;
+    color: #fff;
+}
+
+/* Foco (UX importante) */
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--accent-red);
+}
+
+.form-actions {
+    margin-top: 20px;
+    text-align: center;
+}
+
+
+/* Estado de erro (para uso futuro com JS) */
+.form-group.error input,
+.form-group.error select {
+    border-color: #ff4d4d;
+}
+
+.form-group.error small {
+    color: #ff4d4d;
+    font-size: 0.8rem;
+}
+
+/* Botão de formulário */
+.form-submit {
+    margin-top: 10px;
+}
+
+.form-submit button,
+.form-submit .cta-agendar {
+    width: 100%;
 }

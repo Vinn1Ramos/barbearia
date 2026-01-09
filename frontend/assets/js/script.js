@@ -1,76 +1,134 @@
-// Aguarda o carregamento total do DOM
-document.addEventListener('DOMContentLoaded', function() {
-    
-    // 1. CAPTURA DE CLIQUES (Delegação de Eventos)
-    document.addEventListener('click', function(e) {
-        const target = e.target;
 
-        // --- Lógica do Botão "Agendar Agora" ---
-        if (target.closest('.cta-agendar')) {
-            const token = localStorage.getItem('token');
-            
-            // Se NÃO estiver logado
-            if (!token) {
-                e.preventDefault(); // Para o link
-                const btn = target.closest('.cta-agendar');
-                const nextUrl = btn.getAttribute('href') || 'pages/agendamento.html';
-                
-                abrirModal(nextUrl);
-            }
+// ================================
+// SCRIPT PRINCIPAL - RAMOS BARBEARIA
+// ================================
+
+document.addEventListener('DOMContentLoaded', () => {
+
+    /* =====================================
+       AUTENTICAÇÃO (LOGIN / LOGOUT)
+    ===================================== */
+    const authBtn = document.getElementById('auth-btn');
+    const token = localStorage.getItem('token');
+
+    if (authBtn) {
+        if (token) {
+            // Usuário logado → botão vira "Sair"
+            authBtn.innerHTML = '<i class="fa-solid fa-right-from-bracket"></i>';
+            authBtn.title = 'Sair';
+
+            authBtn.addEventListener('click', () => {
+                localStorage.removeItem('token');
+                window.location.reload();
+            });
+
+        } else {
+            // Usuário não logado → redireciona para login
+            authBtn.addEventListener('click', () => {
+                window.location.href = 'pages/login.html';
+            });
         }
+    }
 
-        // --- Lógica de Fechar o Modal (X ou Botão Cancelar) ---
-        if (target.closest('#modal-close-btn') || target.closest('.modal-close')) {
-            fecharModal();
-        }
+    /* =====================================
+       CARREGAMENTO DE SERVIÇOS
+    ===================================== */
+/*   const servicesGrid = document.getElementById('services-grid');
 
-        // --- Lógica de clicar no Backdrop (fora do modal) ---
-        if (target.classList.contains('modal-backdrop') || target.classList.contains('modal-root')) {
-            fecharModal();
-        }
+    if (servicesGrid) {
+        fetch('http://localhost:3000/servicos')
+            .then(res => res.json())
+            .then(servicos => {
+                servicesGrid.innerHTML = '';
 
-        // --- Lógica do Botão "Entrar" dentro do Modal ---
-        if (target.closest('#modal-login-btn')) {
+                servicos.forEach(servico => {
+                    const card = document.createElement('div');
+                    card.className = 'service-card red-card';
+
+                    card.innerHTML = `
+                        <i class="fa-solid fa-scissors"></i>
+                        <h3>${servico.nome}</h3>
+                        <p>${servico.descricao || 'Serviço premium Ramos Barbearia'}</p>
+                        <strong>R$ ${servico.preco}</strong>
+                    `;
+
+                    servicesGrid.appendChild(card);
+                });
+            })
+            .catch(() => {
+                servicesGrid.innerHTML = '<p>Erro ao carregar serviços.</p>';
+            });
+    }
+*/
+    /* =====================================
+       PROTEÇÃO DO BOTÃO "AGENDAR"
+    ===================================== */
+   document.addEventListener('click', (e) => {
+        const btn = e.target.closest('.cta-agendar');
+        if (!btn) return;
+
+        if (!localStorage.getItem('token')) {
             e.preventDefault();
-            const modal = document.getElementById('login-modal');
-            const proximoPasso = modal.dataset.next || 'pages/agendamento.html';
-            // Redireciona para a tela de login levando o destino original
-            window.location.href = 'pages/login.html?next=' + encodeURIComponent(proximoPasso);
-      }
+            abrirModal(btn.getAttribute('href'));
+        }
     });
 
-    // 2. FUNÇÕES DE SUPORTE
-    function abrirModal(url) {
-        const modal = document.getElementById('login-modal');
-        if (modal) {
-            modal.dataset.next = url;
-            modal.classList.add('modal-open');
-            modal.setAttribute('aria-hidden', 'false');
-            modal.style.visibility = 'visible'; // Garante visibilidade
-            modal.style.pointerEvents = 'auto'; // Garante que aceite cliques
-        }
+    /* =====================================
+       MODAL DE LOGIN
+    ===================================== */
+    const modal = document.getElementById('login-modal');
+    const modalLoginBtn = document.getElementById('modal-login-btn');
+
+    function abrirModal(nextUrl) {
+        if (!modal) return;
+
+        modal.dataset.next = nextUrl || 'pages/agendamento.html';
+        modal.classList.add('modal-open');
+        modal.style.visibility = 'visible';
+        modal.style.pointerEvents = 'auto';
     }
 
     function fecharModal() {
-        const modal = document.getElementById('login-modal');
-        if (modal) {
-            modal.classList.remove('modal-open');
-            modal.setAttribute('aria-hidden', 'true');
-            modal.style.visibility = 'hidden';
-            modal.style.pointerEvents = 'none';
-        }
+        if (!modal) return;
+
+        modal.classList.remove('modal-open');
+        modal.style.visibility = 'hidden';
+        modal.style.pointerEvents = 'none';
     }
 
-    // 3. EFEITO DO HEADER AO ROLAR
-    window.addEventListener('scroll', function() {
-        const header = document.querySelector('header');
-        if (header) {
-            header.style.backgroundColor = window.scrollY > 50 ? '#000' : 'rgba(0, 0, 0, 0.9)';
-        }
-    });
+    if (modal) {
+        modal.addEventListener('click', (e) => {
+            if (
+                e.target.classList.contains('modal-backdrop') ||
+                e.target.classList.contains('modal-close')
+            ) {
+                fecharModal();
+            }
+        });
+    }
 
-    // 4. FECHAR COM TECLA ESC
-    document.addEventListener('keydown', function(e) {
+    if (modalLoginBtn) {
+        modalLoginBtn.addEventListener('click', () => {
+            const next = modal.dataset.next || 'pages/agendamento.html';
+            window.location.href =
+                'pages/login.html?next=' + encodeURIComponent(next);
+        });
+    }
+
+    document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') fecharModal();
     });
+
+    /* =====================================
+       EFEITO DO HEADER NO SCROLL
+    ===================================== */
+    const header = document.querySelector('header');
+
+    if (header) {
+        window.addEventListener('scroll', () => {
+            header.style.backgroundColor =
+                window.scrollY > 50 ? '#000' : 'rgba(0, 0, 0, 0.9)';
+        });
+    }
+
 });

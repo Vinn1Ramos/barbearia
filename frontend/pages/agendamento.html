@@ -5,99 +5,153 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agendamento - Ramos Barbearia</title>
-    <!-- stylesheet relativa corrigida -->
+
+    <!-- CSS principal do projeto -->
     <link rel="stylesheet" href="../assets/style/style.css">
 </head>
 
 <body>
 
-    <!-- Página de agendamento (formulário de exemplo) -->
+    <!-- HEADER / NAVBAR -->
     <header>
         <nav id="navbar">
             <img src="../assets/img/logo.png" alt="Ramos Barbearia" class="logo-nav">
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="index.html#servicos">Serviços</a></li>
-            </ul>
-            <a href="../index.html" class="cta-agendar">Voltar</a>
 
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../index.html#servicos">Serviços</a></li>
+            </ul>
+
+            <a href="../index.html" class="cta-agendar">Voltar</a>
         </nav>
     </header>
 
-    <main style="padding:120px 5%;">
-        <h1>Agendamento pelo site</h1>
-        <p>Use o formulário abaixo para solicitar um agendamento. Isto é um formulário de exemplo; integre com seu
-            backend quando estiver pronto.</p>
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main>
+        <div class="form-wrapper">
+            <h1>Agendamento pelo site</h1>
+            <p>Preencha o formulário abaixo para solicitar seu horário.</p>
 
-        <!-- Formulário de agendamento (exemplo) -->
-        <form id="form-agendamento" action="#" method="post" style="max-width:600px;">
-            <label for="nome">Nome completo</label>
-            <input id="nome" name="nome" type="text" required
-                style="width:100%;padding:10px;margin:8px 0;border-radius:4px;border:1px solid #333;background:#111;color:#fff;">
+            <!-- FORMULÁRIO DE AGENDAMENTO -->
+            <!-- Nome -->
+            <form id="form-agendamento">
 
-            <label for="telefone">Telefone</label>
-            <input id="telefone" name="telefone" type="tel" required placeholder="(XX) XXXXX-XXXX"
-                style="width:100%;padding:10px;margin:8px 0;border-radius:4px;border:1px solid #333;background:#111;color:#fff;">
+                <div class="form-group">
+                    <label for="nome">Nome completo</label>
+                    <input id="nome" name="nome" type="text" required>
+                </div>
 
-            <label for="servico">Serviço</label>
-            <select id="servico" name="servico"
-                style="width:100%;padding:10px;margin:8px 0;border-radius:4px;border:1px solid #333;background:#111;color:#fff;">
-                <option>Corte Clássico</option>
-                <option>Barba Terapia</option>
-                <option>Combo Ramos</option>
-            </select>
+                <div class="form-group">
+                    <label for="telefone">Telefone</label>
+                    <input id="telefone" name="telefone" type="tel" required>
+                </div>
 
-            <label for="data">Data desejada</label>
-            <input id="data" name="data" type="date"
-                style="width:100%;padding:10px;margin:8px 0;border-radius:4px;border:1px solid #333;background:#111;color:#fff;">
+                <div class="form-group">
+                    <label for="servico">Serviço</label>
+                    <select id="servico" name="servico">
+                        <option>Corte Clássico</option>
+                        <option>Barba Terapia</option>
+                        <option>Combo Ramos</option>
+                    </select>
+                </div>
 
-            <label for="hora">Hora</label>
-            <input id="hora" name="hora" type="time"
-                style="width:100%;padding:10px;margin:8px 0;border-radius:4px;border:1px solid #333;background:#111;color:#fff;">
+                <div class="form-group">
+                    <label for="data">Data desejada</label>
+                    <input id="data" name="data" type="date" required>
+                </div>
 
-            <button type="submit" class="btn-primary" style="margin-top:10px;">Enviar solicitação</button>
-        </form>
+                <div class="form-group">
+                    <label for="hora">Hora</label>
+                    <input id="hora" name="hora" type="time" required>
+                </div>
 
-        <p style="margin-top:20px;">Ou <a
-                href="https://wa.me/5132472310?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20um%20hor%C3%A1rio%20na%20Ramos%20Barbearia.%20Meu%20nome%20%3A%20%5Bseu%20nome%5D."
-                class="btn-whatsapp">agendar via WhatsApp</a>.</p>
+                <div class="form-actions">
+                    <button type="submit" class="cta-agendar">
+                        Enviar solicitação
+                    </button>
+                </div>
+            </form>
+        </div>
+        <!-- WhatsApp -->
+        <p style="margin-top:20px;">
+            Ou
+            <a href="https://wa.me/5132472310?text=Olá! Gostaria de agendar um horário na Ramos Barbearia."
+                class="btn-whatsapp" target="_blank">
+                Agendar via WhatsApp
+            </a>
+        </p>
+
     </main>
 
+    <!-- FOOTER -->
     <footer style="padding:20px;text-align:center;border-top:1px solid #222;">
         <p>&copy; 2024 Ramos Barbearia - Todos os direitos reservados.</p>
     </footer>
 
+    <!-- SCRIPT DE AGENDAMENTO -->
     <script>
-        document.getElementById('agendamento-form').addEventListener('submit', async (e) => {
+        /**
+         * Verifica se o usuário está logado
+         * Se não estiver, redireciona para login
+         */
+        const token = localStorage.getItem('token');
+
+        if (!token) {
+            window.location.href = '../login.html?next=pages/agendamento.html';
+        }
+
+        /**
+         * Envio do formulário
+         */
+        document.getElementById('form-agendamento').addEventListener('submit', async (e) => {
             e.preventDefault();
 
-            const data = document.getElementById('data').value;
-            const hora_inicio = document.getElementById('hora_inicio').value;
-            const hora_fim = document.getElementById('hora_fim').value;
+            // Captura dos dados
+            const nome = document.getElementById('nome').value.trim();
+            const telefone = document.getElementById('telefone').value.trim();
             const id_servico = document.getElementById('servico').value;
+            const data = document.getElementById('data').value;
+            const hora = document.getElementById('hora').value;
 
-            const response = await fetch('http://localhost:3000/agendamentos', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    id_cliente: 1,   // usuário logado (temporário)
-                    id_barbeiro: 2,  // barbeiro fixo (temporário)
-                    id_servico,
-                    data,
-                    hora_inicio,
-                    hora_fim
-                })
-            });
+            // Validações básicas
+            if (!nome || !telefone || !id_servico || !data || !hora) {
+                alert('Preencha todos os campos.');
+                return;
+            }
 
-            const result = await response.json();
+            try {
+                // Envio para o backend
+                const response = await fetch('http://localhost:3000/agendamentos', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + token
+                    },
+                    body: JSON.stringify({
+                        nome,
+                        telefone,
+                        id_servico,
+                        data,
+                        hora
+                    })
+                });
 
-            if (response.ok) {
-                alert('Agendamento realizado com sucesso');
-            } else {
-                alert(result.erro || 'Erro ao agendar');
+                const result = await response.json();
+
+                if (response.ok) {
+                    alert('Agendamento realizado com sucesso!');
+                    document.getElementById('form-agendamento').reset();
+                } else {
+                    alert(result.erro || 'Erro ao realizar agendamento.');
+                }
+
+            } catch (error) {
+                alert('Erro de conexão com o servidor.');
+                console.error(error);
             }
         });
     </script>
+
 </body>
 
 </html>
