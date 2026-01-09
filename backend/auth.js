@@ -14,13 +14,21 @@ document.getElementById("btn-login").addEventListener("click", function(e){
     const password = document.getElementById("login-password").value;
     console.log("Tentando logar com", email, password);
 
-    if (!email || !password) {
-      alert("Preencha email e senha");
-      return;
-    } 
+    //valida os diferentes erros de auth e exibe mensagem de correção de acordo com o erro
     firebase.auth().signInWithEmailAndPassword(email, password).then(response =>{
-            console.log("Usuário logado com sucesso!", response);
+        console.log("Usuário logado com sucesso!", response);
     }).catch(error =>{
         console.error("Erro ao logar o usuário:", error);
+        console.log("Código do erro:", error.code);
+        if(!password || !email){
+            document.getElementById("invalid-feedback").textContent = "Email e senha não podem estar vazios.";
+            document.getElementById("invalid-feedback").style.display = "block";
+        } else if(error.code === "auth/invalid-credential"){
+            document.getElementById("invalid-feedback").textContent = "Credenciais inválidas.";
+            document.getElementById("invalid-feedback").style.display = "block";
+        } else if(error.code === "auth/invalid-email"){
+            document.getElementById("invalid-feedback").textContent = "Email inválido.";
+            document.getElementById("invalid-feedback").style.display = "block";
+        };
     });
 });

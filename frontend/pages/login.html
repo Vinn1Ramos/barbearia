@@ -38,7 +38,7 @@
               <input type="password" id="login-password" placeholder="Senha">
             </div>
 
-            <div class="invalid-feedback">
+            <div class="invalid-feedback" id="invalid-feedback">
               Informe um email válido.
             </div>
           </div>
@@ -86,51 +86,6 @@
         }, false);
       });
     })();
-
-    /**
-     * LOGIN
-     */
-    document.getElementById('login-form').addEventListener('submit', async (e) => {
-      e.preventDefault();
-
-      const email = document.getElementById('login-email').value.trim();
-      const senha = document.getElementById('login-password').value;
-
-      if (!email || !senha) {
-        alert('Preencha todos os campos.');
-        return;
-      }
-
-      try {
-        const response = await fetch('http://localhost:3000/login', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ email, senha })
-        });
-
-        const data = await response.json();
-
-        if (!response.ok) {
-          alert(data.erro || 'Erro ao realizar login.');
-          return;
-        }
-
-        // Salva token
-        localStorage.setItem('token', data.token);
-
-        // Redirecionamento inteligente
-        const params = new URLSearchParams(window.location.search);
-        const next = params.get('next');
-
-        window.location.href = next ? `../${next}` : '../pages/agendamento.html';
-
-      } catch (error) {
-        console.error(error);
-        alert('Erro ao conectar com o servidor.');
-      }
-    });
   </script>
 
 </body>
