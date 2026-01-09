@@ -33,37 +33,37 @@ document.addEventListener('DOMContentLoaded', () => {
     /* =====================================
        CARREGAMENTO DE SERVIÇOS
     ===================================== */
-/*   const servicesGrid = document.getElementById('services-grid');
-
-    if (servicesGrid) {
-        fetch('http://localhost:3000/servicos')
-            .then(res => res.json())
-            .then(servicos => {
-                servicesGrid.innerHTML = '';
-
-                servicos.forEach(servico => {
-                    const card = document.createElement('div');
-                    card.className = 'service-card red-card';
-
-                    card.innerHTML = `
-                        <i class="fa-solid fa-scissors"></i>
-                        <h3>${servico.nome}</h3>
-                        <p>${servico.descricao || 'Serviço premium Ramos Barbearia'}</p>
-                        <strong>R$ ${servico.preco}</strong>
-                    `;
-
-                    servicesGrid.appendChild(card);
+    /*   const servicesGrid = document.getElementById('services-grid');
+    
+        if (servicesGrid) {
+            fetch('http://localhost:3000/servicos')
+                .then(res => res.json())
+                .then(servicos => {
+                    servicesGrid.innerHTML = '';
+    
+                    servicos.forEach(servico => {
+                        const card = document.createElement('div');
+                        card.className = 'service-card red-card';
+    
+                        card.innerHTML = `
+                            <i class="fa-solid fa-scissors"></i>
+                            <h3>${servico.nome}</h3>
+                            <p>${servico.descricao || 'Serviço premium Ramos Barbearia'}</p>
+                            <strong>R$ ${servico.preco}</strong>
+                        `;
+    
+                        servicesGrid.appendChild(card);
+                    });
+                })
+                .catch(() => {
+                    servicesGrid.innerHTML = '<p>Erro ao carregar serviços.</p>';
                 });
-            })
-            .catch(() => {
-                servicesGrid.innerHTML = '<p>Erro ao carregar serviços.</p>';
-            });
-    }
-*/
+        }
+    */
     /* =====================================
        PROTEÇÃO DO BOTÃO "AGENDAR"
     ===================================== */
-   document.addEventListener('click', (e) => {
+    document.addEventListener('click', (e) => {
         const btn = e.target.closest('.cta-agendar');
         if (!btn) return;
 
@@ -130,5 +130,52 @@ document.addEventListener('DOMContentLoaded', () => {
                 window.scrollY > 50 ? '#000' : 'rgba(0, 0, 0, 0.9)';
         });
     }
+    /* =====================================
+        REGISTER (CADASTRO)
+    ===================================== */
+    const registerForm = document.getElementById('register-form');
 
+    if (registerForm) {
+        registerForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const nome = document.getElementById('reg-name')?.value.trim();
+            const email = document.getElementById('reg-email')?.value.trim();
+            const senha = document.getElementById('reg-password')?.value;
+
+            if (!nome || nome.length < 3) {
+                alert('Nome deve ter no mínimo 3 caracteres');
+                return;
+            }
+
+            if (!email || !email.includes('@')) {
+                alert('Informe um email válido');
+                return;
+            }
+
+            if (!senha || senha.length < 6) {
+                alert('Senha deve ter no mínimo 6 caracteres');
+                return;
+            }
+
+            try {
+                const response = await fetch('http://localhost:3000/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ nome, email, senha })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    alert('Cadastro realizado com sucesso');
+                    window.location.href = 'login.html';
+                } else {
+                    alert(data.erro || 'Erro no cadastro');
+                }
+            } catch (err) {
+                alert('Erro de conexão com o servidor.');
+            }
+        });
+    }
 });
