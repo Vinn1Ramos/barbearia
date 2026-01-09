@@ -9,137 +9,105 @@
     <script src="../assets/js/script.js"></script>
 </head>
 
-<body class="bg-dark text-light">
+<body>
 
-    <!-- CONTAINER CENTRAL -->
-    <div class="container min-vh-100 d-flex align-items-center justify-content-center">
-        <div class="card shadow-sm bg-black text-light" style="max-width:420px; width:100%;">
+  <header>
+    <nav id="navbar">
+      <div class="imagens">
+        <img src="../assets/img/logo.png" alt="logo barbearia" id="brand-logo">
+        <img src="../assets/img/Captura_de_tela_2026-01-05_233355-removebg-preview.png" alt="logo nome" id="brand-name">
+      </div>
 
-            <div class="card-body">
-                <h3 class="card-title text-center mb-4">Criar conta</h3>
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../index.html#servicos">Serviços</a></li>
+        <li><a href="../index.html#contato">Contato</a></li>
+      </ul>
 
-                <!-- FORMULÁRIO DE REGISTRO -->
-                <form id="register-form" class="needs-validation" novalidate>
+      <div class="header-controls">
+        <a href="login.html" class="icon-btn btn-login" title="Entrar" aria-label="Entrar">
+          <i class="fas fa-user"></i>
+        </a>
+        <a href="register.html" class="cta-agendar" aria-label="Criar conta">CRIAR CONTA</a>
+      </div>
+    </nav>
+  </header>
 
-                    <!-- NOME -->
-                    <div class="mb-3">
-                        <div class="form-group">
-                            <label>Nome</label>
-                            <input type="text">
-                        </div>
-                        <div class="form-group">
-                            <label>Email</label>
-                            <input type="email">
-                        </div>
+  <main style="padding:120px 5%;">
+    <div class="form-wrapper">
+      <h1>CRIAR CONTA</h1>
 
-                        <div class="form-group">
-                            <label>Senha</label>
-                            <input type="email">
-                        </div>
-                        <div class="form-group">
-                            <label>Confirmar Senha</label>
-                            <input type="email">
-                        </div>
-                        <div class="form-group">
-                            <label>Celular</label>
-                            <input type="email">
-                        </div>
-
-                        <div class="invalid-feedback">
-                            Informe um nome com pelo menos 3 caracteres.
-                        </div>
-                    </div>
-
-                    <!-- BOTÃO -->
-                    <div class="form-submit">
-                        <button type="submit" class="cta-agendar">Criar conta</button>
-                    </div>
-                </form>
-
-                <!-- LINK LOGIN -->
-                <div class="text-center mt-3">
-                    <small class="text-muted">
-                        Já tem conta?
-                        <a href="login.html">Entrar</a>
-                    </small>
-                </div>
-            </div>
+      <form id="register-form" novalidate>
+        <div class="form-group">
+          <label for="reg-name">Nome</label>
+          <input type="text" id="reg-name" required />
         </div>
+
+        <div class="form-group">
+          <label for="reg-email">Email</label>
+          <input type="email" id="reg-email" required />
+        </div>
+
+        <div class="form-group">
+          <label for="reg-password">Senha</label>
+          <input type="password" id="reg-password" required />
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="cta-agendar">REGISTRAR</button>
+        </div>
+      </form>
+
+      <p class="form-helper">
+        Já tem conta? <a href="login.html">Entrar</a>
+      </p>
     </div>
+  </main>
 
-    <!-- SCRIPT REGISTER -->
-    <script>
-        /**
-         * Validação Bootstrap
-         */
-        (function () {
-            'use strict'
-            const forms = document.querySelectorAll('.needs-validation');
+  <footer>
+    <p>&copy; 2024 Ramos Barbearia - Todos os direitos reservados.</p>
+  </footer>
 
-            Array.from(forms).forEach(form => {
-                form.addEventListener('submit', event => {
-                    if (!form.checkValidity()) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                    form.classList.add('was-validated');
-                }, false);
-            });
-        })();
+  <script src="../assets/js/script.js"></script>
 
-        /**
-         * REGISTRO DE USUÁRIO
-         */
-        document.getElementById('register-form').addEventListener('submit', async (e) => {
-            e.preventDefault();
+  <script>
+    document.getElementById('register-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
 
-            const nome = document.getElementById('reg-name').value.trim();
-            const email = document.getElementById('reg-email').value.trim();
-            const senha = document.getElementById('reg-password').value;
+      const nome = document.getElementById('reg-name').value.trim();
+      const email = document.getElementById('reg-email').value.trim();
+      const senha = document.getElementById('reg-password').value;
 
-            if (nome.length < 3) {
-                alert('O nome deve ter pelo menos 3 caracteres.');
-                return;
-            }
+      if (nome.length < 3) {
+        alert('Nome deve ter no mínimo 3 caracteres');
+        return;
+      }
 
-            if (!email.includes('@')) {
-                alert('Informe um email válido.');
-                return;
-            }
+      if (!email.includes('@')) {
+        alert('Informe um email válido');
+        return;
+      }
 
-            if (senha.length < 6) {
-                alert('A senha deve ter no mínimo 6 caracteres.');
-                return;
-            }
+      if (senha.length < 6) {
+        alert('Senha deve ter no mínimo 6 caracteres');
+        return;
+      }
 
-            try {
-                const response = await fetch('http://localhost:3000/register', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ nome, email, senha })
-                });
+      const response = await fetch('http://localhost:3000/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nome, email, senha })
+      });
 
-                const data = await response.json();
+      const data = await response.json();
 
-                if (!response.ok) {
-                    alert(data.erro || 'Erro ao criar conta.');
-                    return;
-                }
-
-                alert('Cadastro realizado com sucesso!');
-
-                // Redireciona para login
-                window.location.href = 'login.html';
-
-            } catch (error) {
-                console.error(error);
-                alert('Erro ao conectar com o servidor.');
-            }
-        });
-    </script>
-
+      if (response.ok) {
+        alert('Cadastro realizado com sucesso');
+        window.location.href = 'login.html';
+      } else {
+        alert(data.erro || 'Erro no cadastro');
+      }
+    });
+  </script>
 </body>
-
 </html>
