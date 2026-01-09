@@ -8,8 +8,8 @@ const firebaseConfig = {
   };
   firebase.initializeApp(firebaseConfig);
 
-firebase.auth().signInWithEmailAndPassword("teste@abc.com", "123456").then(response =>{
+firebase.auth().signInWithEmailAndPassword("brunodubalhoffmann@hotmail.com", "123456").then(response =>{
         console.log("Usuário logado com sucesso!", response);
 }).catch(error =>{
     console.error("Erro ao logar o usuário:", error);
-})
+});
