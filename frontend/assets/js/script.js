@@ -67,11 +67,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const btn = e.target.closest('.cta-agendar');
         if (!btn) return;
 
-        if (!localStorage.getItem('token')) {
+        const user = firebase.auth().currentUser;
+
+        if (!user) {
             e.preventDefault();
             abrirModal(btn.getAttribute('href'));
         }
     });
+
 
     /* =====================================
        MODAL DE LOGIN
