@@ -494,45 +494,141 @@ button:disabled,
     width: 100%;
 }
 
-/* =========================
-   REGISTER - BOTÃO VOLTAR
-========================= */
+.form-helper a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-block; /* necessário para o transform */
+    transition: color 0.25s ease, transform 0.25s ease;
+    text-decoration: underline;
+}
+
+.form-helper a:hover {
+    color: var(--accent-red);
+    transform: scale(1.08); /* aumenta levemente */
+}
+
+
 /* =========================
    BOTÃO VOLTAR (REGISTER / LOGIN)
 ========================= */
-header .header-controls a.btn-voltar,
-header .header-controls a.btn-voltar:link,
-header .header-controls a.btn-voltar:visited {
+
+a.btn-voltar,
+a.btn-voltar:visited {
     color: #ffffff;
     text-decoration: none;
+    
 }
 
-header .header-controls a.btn-voltar i {
-    color: inherit;
-    font-size: 34px;
-    transition: color 0.25s ease, transform 0.25s ease;
-}
-
-header .header-controls a.btn-voltar:hover,
-header .header-controls a.btn-voltar:hover i {
+a.btn-voltar:hover {
     color: var(--accent-red);
 }
 
-header .header-controls a.btn-voltar:hover i {
-    transform: translateX(-3px) scale(1.1);
+/* garante que o ícone herde a cor do link */
+a.btn-voltar i {
+    color: inherit;
+    font-size: 20px;
 }
 
 /* =========================
-   REGISTER - LINK "ENTRAR"
+   PÁGINAS DE FORMULÁRIO (LOGIN / REGISTER / AGENDAMENTO)
 ========================= */
-body .form-helper a {
-    color: #ffffff;
-    font-weight: 600;
-    text-decoration: none;
-    transition: color 0.25s ease;
-    text-decoration: underline ;
+.auth-page {
+    padding: 120px 5%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
 }
 
-body .form-helper a:hover {
-    color: var(--accent-red);
+.form-wrapper {
+    width: 100%;
+    max-width: 420px;
+    background: var(--dark-grey);
+    border: 1px solid #222;
+    border-radius: 10px;
+    padding: 28px 22px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.35);
 }
+
+.form-wrapper h1 {
+    text-align: center;
+    font-size: 1.6rem;
+    margin-bottom: 18px;
+    letter-spacing: 1px;
+}
+
+/* =========================
+   INPUTS PADRÃO
+========================= */
+.form-group {
+    margin-bottom: 14px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #ddd;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px 12px;
+    border-radius: 8px;
+    border: 1px solid #333;
+    background: #111;
+    color: #fff;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.05s ease;
+}
+
+/* foco (quando clica no input) */
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: var(--accent-red);
+    box-shadow: 0 0 0 3px rgba(230,0,0,0.18);
+}
+
+/* estados nativos HTML5 */
+.form-group input:required:invalid:not(:placeholder-shown) {
+    border-color: var(--accent-red);
+}
+
+.form-group input:required:valid {
+    border-color: #1ebe57;
+}
+
+/* =========================
+   AÇÕES DO FORMULÁRIO
+========================= */
+.form-actions {
+    margin-top: 16px;
+    display: flex;
+    justify-content: center;
+}
+
+/* texto auxiliar (ex: "Não tem conta? Registrar") */
+.form-helper {
+    margin-top: 14px;
+    text-align: center;
+    color: #bdbdbd;
+}
+
+/* link auxiliar (com hover + zoom que você já gosta) */
+.form-helper a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-block;
+    transition: color 0.25s ease, transform 0.25s ease;
+}
+
+.form-helper a:hover {
+    color: var(--accent-red);
+    transform: scale(1.08);
+}
+
