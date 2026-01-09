@@ -60,11 +60,20 @@
 
                 <div class="form-group">
                     <label for="reg-password">Confirmar senha:</label>
-                    <input type="password" id="reg-password" required />
+                    <input type="password" id="reg-password-confirm" required />
                 </div>
 
-                <div class="form-actions">
-                    <button type="submit" class="cta-agendar">REGISTRAR</button>
+                <div>
+                    <div class="invalid-feedback" id="reg-invalid-feedback">
+                        <!-- Mensagens de erro serão exibidas aqui -->
+                    </div>
+                </div>
+
+                <!-- BOTÃO -->
+                <div class="d-grid">
+                    <div class="form-submit">
+                    <button type="submit" class="cta-agendar" id="btn-reg">Registrar</button>
+                    </div>
                 </div>
             </form>
 
@@ -78,6 +87,9 @@
         <p>&copy; 2024 Ramos Barbearia - Todos os direitos reservados.</p>
     </footer>
 
+    <script src="https://www.gstatic.com/firebasejs/12.7.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/12.7.0/firebase-auth-compat.js"></script>
+    <script src="../../backend/auth.js"></script>
 </body>
 
 </html>
