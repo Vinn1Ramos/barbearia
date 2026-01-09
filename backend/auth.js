@@ -55,9 +55,9 @@ if (btnRegister){
           return;
       }
       firebase.auth().createUserWithEmailAndPassword(email, password).then(response =>{
-          document.getElementById("reg-invalid-feedback").textContent = "Usuário registrado com sucesso!";
-          document.getElementById("register-form").reset();
-          window.location.href = "login.html";
+        document.getElementById("reg-invalid-feedback").textContent = "Usuário registrado com sucesso!";
+        window.location.href = "login.html";
+        return firebase.auth().signOut();
       }).catch(error =>{
           console.error("Erro ao registrar o usuário:", error);
           if(!password || !email || !name || !passwordConfirm){
