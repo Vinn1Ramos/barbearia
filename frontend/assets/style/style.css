@@ -178,6 +178,36 @@ nav ul li a:hover {
     border: 2px solid var(--accent-red);
 }
 
+.services-subtitle {
+  margin-top: 10px;
+  color: #cfcfcf;
+  font-size: 0.95rem;
+}
+
+.services-alt {
+  background: radial-gradient(circle at top, rgba(230,0,0,0.10), transparent 55%);
+}
+
+.services-grid-alt {
+  margin-top: 30px;
+}
+
+.service-card-alt {
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.0));
+  transition: transform .2s ease, border-color .2s ease;
+}
+
+.service-card-alt:hover {
+  transform: translateY(-4px);
+  border-color: rgba(230,0,0,0.35);
+}
+
+.service-card-alt i {
+  font-size: 2.4rem;
+}
+
 footer {
     padding: 20px;
     text-align: center;
@@ -359,7 +389,7 @@ footer {
 }
 
 /* =========================
-   Ícones do Header (Login / WhatsApp)
+   Ícones do Header (Login / WhatsApp / Logout)
 ========================= */
 /* força o logout a vir antes do login */
 #logout-btn {
@@ -410,13 +440,21 @@ footer {
     transition: color 0.25s ease;
 }
 
-.btn-logout{
+.btn-login:hover i {
+    color: var(--accent-red);
+}
+
+/* =========================
+   LOGOUT
+========================= */
+
+.btn-logout i {
     font-size: 26px;
     color: #ffffff;
     transition: color 0.25s ease;
 }
 
-.btn-login:hover i {
+.btn-logout:hover i {
     color: var(--accent-red);
 }
 
