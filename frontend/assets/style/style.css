@@ -905,10 +905,6 @@ header .cta-agendarr {
     height: fit-content;
     line-height: normal;
 }
-
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 /* =========================
    FOOTER (mais elaborado)
 ========================= */
@@ -1057,20 +1053,11 @@ header .cta-agendarr {
   .footer-name {
     width: 120px;
   }
-=======
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
+}
+
 .agendamento-card .cta-agendar {
     width: 100%;
     max-width: 100%;
     text-align: center;
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
+
 }
