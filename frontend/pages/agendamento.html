@@ -8,7 +8,6 @@
 
     <!-- CSS principal do projeto -->
     <link rel="stylesheet" href="../assets/style/style.css">
-    <script src="../assets/js/script.js"></script>
 </head>
 
 <body>
@@ -42,16 +41,6 @@
         <section class="form-wrapper agendamento-card">
 
             <form id="form-agendamento">
-
-                <div class="form-group">
-                    <label for="nome">Nome completo</label>
-                    <input id="nome" name="nome" type="text" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="telefone">Telefone</label>
-                    <input id="telefone" name="telefone" type="tel" required>
-                </div>
 
                 <div class="form-group">
                     <label for="servico">Serviço</label>
@@ -102,82 +91,10 @@
         <p>&copy; 2024 Ramos Barbearia - Todos os direitos reservados.</p>
     </footer>
 
-    <!-- SCRIPT DE AGENDAMENTO -->
-    <script>
-        /**
-         * Verifica se o usuário está logado
-         * Se não estiver, redireciona para login
-         */
-
-
-
-        /*CODIGO COMENTADO PARA BOTAO AGENDAR AGORA FUNCIONAR */
-        /*
-        const token = localStorage.getItem('token');
-
-        if (!token) {
-            window.location.href = '../login.html?next=pages/agendamento.html';
-        }
-        */
-        /*CODIGO COMENTADO PARA BOTAO AGENDAR AGORA FUNCIONAR */
-
-
-
-
-        /**
-         * Envio do formulário
-         */
-        document.getElementById('form-agendamento').addEventListener('submit', async (e) => {
-            e.preventDefault();
-
-            // Captura dos dados
-            const nome = document.getElementById('nome').value.trim();
-            const telefone = document.getElementById('telefone').value.trim();
-            const id_servico = document.getElementById('servico').value;
-            const data = document.getElementById('data').value;
-            const hora = document.getElementById('hora').value;
-
-            // Validações básicas
-            if (!nome || !telefone || !id_servico || !data || !hora) {
-                alert('Preencha todos os campos.');
-                return;
-            }
-
-            try {
-                // Envio para o backend
-                const response = await fetch('http://localhost:3000/agendamentos', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Bearer ' + token
-                    },
-                    body: JSON.stringify({
-                        nome,
-                        telefone,
-                        id_servico,
-                        data,
-                        hora
-                    })
-                });
-
-                const result = await response.json();
-
-                if (response.ok) {
-                    alert('Agendamento realizado com sucesso!');
-                    document.getElementById('form-agendamento').reset();
-                } else {
-                    alert(result.erro || 'Erro ao realizar agendamento.');
-                }
-
-            } catch (error) {
-                alert('Erro de conexão com o servidor.');
-                console.error(error);
-            }
-        });
-    </script>
     <script src="assets/js/script.js"></script>
     <script src="https://www.gstatic.com/firebasejs/12.7.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/12.7.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/12.7.0/firebase-firestore-compat.js"></script>
     <script src="../assets/js/loading.js"></script>
     <script src="../../backend/auth.js"></script>
 </body>
