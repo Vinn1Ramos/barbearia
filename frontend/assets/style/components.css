@@ -161,6 +161,8 @@
   border-radius: 8px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   padding: 32px 28px 56px;
+  opacity: 0; 
+  transform: translateY(10px) scale(.096);
 }
 
 .modal-panel h3 {
@@ -216,12 +218,9 @@
   pointer-events: auto;
 }
 
-.modal-open .modal-backdrop {
-  background: rgba(0, 0, 0, 0.6);
-}
-
 .modal-open .modal-panel {
   opacity: 1;
+  transform: translateY(0) scale(1);
   animation: modalPop 0.25s ease-out;
 }
 
