@@ -205,7 +205,7 @@ function gerarHorariosDisponiveis(dataSelecionada) {
         const h = String(Math.floor(minutos / 60)).padStart(2, '0');
         const m = String(minutos % 60).padStart(2, '0');
         const horaStr = `${h}:${m}`;
-
+ 
         // Se a data for hoje, bloqueia horários passados
         if (dataSelecionada === hojeISO) {
             const dataHora = new Date(`${dataSelecionada}T${horaStr}`);
