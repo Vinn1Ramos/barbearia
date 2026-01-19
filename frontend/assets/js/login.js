@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
             console.log("Tentando logar com", email, password);
 
             // Faz login no Firebase
-            firebase.auth().signInWithEmailAndPassword(email, password).then(async (userCredential) => {
+            firebase.auth().signInWithEmailAndPassword(email, password).then( (userCredential) => {
                 const user = userCredential.user;
 
                 if (!user.emailVerified) {
