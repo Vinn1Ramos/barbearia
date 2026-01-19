@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const nameInput = document.getElementById("reg-name");
     const btnRegister = document.getElementById("btn-reg");
     const feedback = document.getElementById("reg-invalid-feedback");
-    const celInput = document.getElementById("reg-cel");
+    //const celInput = document.getElementById("reg-cel");
 
 
     // ================================
@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
             email &&
             email &&
             name &&
-            celInput.value.length >= 14 &&
+            //celInput.value.length >= 14 &&
             password &&
             passwordConfirm;
 
@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
     btnRegister.disabled = true;
 
     // Escuta digitação
-    [emailInput, celInput, passwordInput, passwordConfirmInput, nameInput].forEach(input => {
+    [emailInput, passwordInput, passwordConfirmInput, nameInput].forEach(input => {
         input.addEventListener("input", validarFormularioRegistro);
     });
 
@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
         showLoading();
 
         const email = emailInput.value.trim();
-        const celular = celInput.value.trim();
+        //const celular = celInput.value.trim();
         const password = passwordInput.value;
         const passwordConfirm = passwordConfirmInput.value;
         const name = nameInput.value.trim();

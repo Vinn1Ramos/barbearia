@@ -188,8 +188,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         await window.registerAgendamento(agendamentoData)
     });
-
 });
+
 function gerarHorariosDisponiveis(dataSelecionada) {
     const selectHora = document.getElementById('hora');
     selectHora.innerHTML = '<option value="">Selecione um horário</option>';
