@@ -1,4 +1,4 @@
-const API = "http://localhost:3001";
+const API = "https://spoutless-catarina-immusically.ngrok-free.dev";
 
 // backend/auth.js
 const firebaseConfig = {

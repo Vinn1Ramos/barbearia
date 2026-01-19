@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const agora = new Date();
 
-        // 🔥 agora usamos a variável GLOBAL
+        // agora usamos a variável GLOBAL
         dataEscolhida = new Date(dataInput.value + "T00:00");
 
         hojeData = new Date();

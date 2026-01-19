@@ -90,10 +90,27 @@ nav ul li a:hover {
 
 .services-alt {
   background:
-    #070707,
     linear-gradient(to bottom, #070707 0%, transparent 25%),
     radial-gradient(circle at top, rgba(230, 0, 0, 0.12), transparent 60%),
-    radial-gradient(circle at top, rgba(230, 0, 0, 0.10), transparent 55%),
+    radial-gradient(circle at top, rgba(230, 0, 0, 0.10), transparent 55%);
+  background-color: #070707;
+  position: relative;
+  padding-top: 100px;
+}
+
+.services-alt::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 300px;
+  background:
+    linear-gradient(to bottom,
+      #070707 0%,
+      rgba(230, 0, 0, 0.08) 50%,
+      transparent 100%);
+  pointer-events: none;
 }
 
 .services-grid-alt {
@@ -229,4 +246,97 @@ nav ul li a:hover {
 
 .footer-sep {
   opacity: 0.7;
+}
+
+/* --- MENU HAMBÚRGUER --- */
+.menu-toggle {
+  display: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 15px;
+  z-index: 2500;
+  position: relative;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+}
+
+.hamburger {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background: #fff;
+  position: relative;
+  transition: 0.3s;
+}
+
+.hamburger::before,
+.hamburger::after {
+  content: '';
+  position: absolute;
+  width: 25px;
+  height: 3px;
+  background: #fff;
+  transition: 0.3s;
+}
+
+.hamburger::before {
+  top: -8px;
+}
+
+.hamburger::after {
+  bottom: -8px;
+}
+
+/* Responsividade (Celular) */
+@media (max-width: 850px) {
+  .menu-toggle {
+    display: flex;
+    pointer-events: auto;
+  }
+
+    /* Oculta os links normais para dar espaço */
+  #navbar ul.nav-links:not(.active) {
+    display: none;
+  }
+
+  #navbar ul.nav-links {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    /* Escondido à direita */
+    width: 70%;
+    height: 100vh;
+    background: rgba(7, 7, 7, 0.98);
+    backdrop-filter: blur(10px);
+    flex-direction: column;
+    justify-content: center;
+    gap: 30px;
+    transition: 0.4s ease-in-out;
+    z-index: 2050;
+    border-left: 1px solid #222;
+  }
+
+}
+
+#navbar ul.nav-links.active {
+  right: 0;
+  /* Desliza para dentro da tela */
+}
+
+/* Transformação em X quando ativo */
+.menu-toggle.active .hamburger {
+  background: transparent;
+}
+
+.menu-toggle.active .hamburger::before {
+  transform: rotate(45deg) translate(5px, 6px);
+}
+
+.menu-toggle.active .hamburger::after {
+  transform: rotate(-45deg) translate(5px, -6px);
 }
