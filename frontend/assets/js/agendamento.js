@@ -65,7 +65,11 @@ document.addEventListener('DOMContentLoaded', () => {
     dataInput.setAttribute('min', hojeISO);
 
     // sempre que mudar a data
-    dataInput.addEventListener('change', () => {
+    dataInput.addEventListener('change', async () => {
+        
+        // Coleta horarios ja marcados na data selecionada
+        const agendamentos = await window.consultAgendamentos(new Date(dataInput.value).toISOString())
+        console.log('agendamentos: ' + JSON.stringify(agendamentos))
 
         if (!dataInput.value) {
             horaInput.disabled = true;
@@ -125,15 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
             horaInput.value = "";
             return;
         }
-
-        /* ❌ fora do expediente
-        if (hora < "09:00" || hora > "18:00") {
-            alert("Horário fora do expediente (09:00 - 18:00).");
-            horaInput.value = "";
-            return;
-        }*/
     });
-
 
     // ============================
     // BOTÃO AGENDAR
@@ -141,9 +137,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const agendarBtn = document.getElementById('agendarBtn');
 
     agendarBtn.addEventListener('click', async () => {
-
-        const agendamentos = await window.consultAgendamentos(new Date(dataInput.value).toISOString())
-        console.log('agendamentos: ' + JSON.stringify(agendamentos))
 
         if (!servicoSelecionado) {
             alert("Selecione um serviço.");

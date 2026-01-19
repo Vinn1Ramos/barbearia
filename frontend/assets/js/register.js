@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const nameInput = document.getElementById("reg-name");
     const btnRegister = document.getElementById("btn-reg");
     const feedback = document.getElementById("reg-invalid-feedback");
-    //const celInput = document.getElementById("reg-cel");
+    const celInput = document.getElementById("reg-cel");
 
 
     // ================================
@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
             email &&
             email &&
             name &&
-            //celInput.value.length >= 14 &&
+            celInput.value.length >= 8 &&
             password &&
             passwordConfirm;
 
@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
     btnRegister.disabled = true;
 
     // Escuta digitação
-    [emailInput, passwordInput, passwordConfirmInput, nameInput].forEach(input => {
+    [emailInput, celInput, passwordInput, passwordConfirmInput, nameInput].forEach(input => {
         input.addEventListener("input", validarFormularioRegistro);
     });
 
@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
         showLoading();
 
         const email = emailInput.value.trim();
-        //const celular = celInput.value.trim();
+        const celular = celInput.value.trim();
         const password = passwordInput.value;
         const passwordConfirm = passwordConfirmInput.value;
         const name = nameInput.value.trim();
@@ -71,11 +71,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 console.log('teste1')
                 const payload = {
                     nome: name,
-                    telefone: 'nulo',
+                    telefone: celular,
                     email: user.email,
                     firebase_uid: uid,
                     criado_em: new Date().toISOString()
                 }
+                console.log(payload)
                 localStorage.setItem('idToken', JSON.stringify(idToken))
                 localStorage.setItem('pendingProfile', JSON.stringify(payload))
                 await firebase.auth().signOut();
