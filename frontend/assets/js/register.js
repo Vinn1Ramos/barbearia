@@ -6,8 +6,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const nameInput = document.getElementById("reg-name");
     const btnRegister = document.getElementById("btn-reg");
     const feedback = document.getElementById("reg-invalid-feedback");
-    const celInput = document.getElementById("reg-cel");
-
 
     // ================================
     // VALIDAÇÃO EM TEMPO REAL
@@ -22,7 +20,10 @@ document.addEventListener("DOMContentLoaded", function () {
             email &&
             email &&
             name &&
+<<<<<<< HEAD
             celInput.value.length >= 8 &&
+=======
+>>>>>>> parent of 7f68fae (Merge branch 'main' of https://github.com/Vinn1Ramos/barbearia)
             password &&
             passwordConfirm;
 
@@ -33,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
     btnRegister.disabled = true;
 
     // Escuta digitação
-    [emailInput, celInput, passwordInput, passwordConfirmInput, nameInput].forEach(input => {
+    [emailInput, passwordInput, passwordConfirmInput, nameInput].forEach(input => {
         input.addEventListener("input", validarFormularioRegistro);
     });
 
@@ -45,7 +46,6 @@ document.addEventListener("DOMContentLoaded", function () {
         showLoading();
 
         const email = emailInput.value.trim();
-        const celular = celInput.value.trim();
         const password = passwordInput.value;
         const passwordConfirm = passwordConfirmInput.value;
         const name = nameInput.value.trim();

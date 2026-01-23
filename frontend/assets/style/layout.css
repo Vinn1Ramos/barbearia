@@ -117,7 +117,15 @@ nav ul li a:hover {
   margin-top: 30px;
 }
 
-/* Footer */
+/* Footer simples (páginas internas) */
+.footer-simple {
+  padding: 20px;
+  text-align: center;
+  border-top: 1px solid #222;
+  font-size: 0.9rem;
+}
+
+/* Footer elaborado */
 .site-footer {
   border-top: 1px solid #222;
   background: rgba(0, 0, 0, 0.92);

@@ -99,22 +99,13 @@
 .header-controls {
   display: flex;
   align-items: center;
-  gap: 16px;
-  /* espaçamento igual entre todos */
+  gap: 16px; /* espaçamento igual entre todos */
 }
 
 /* Ordem desejada: logout esquerda, login centro, whatsapp direita */
-#logout-btn {
-  order: 1;
-}
-
-#auth-btn {
-  order: 2;
-}
-
-.btn-whatsapp {
-  order: 3;
-}
+#logout-btn { order: 1; }
+#auth-btn { order: 2; }
+.btn-whatsapp { order: 3; }
 
 .icon-btn {
   display: inline-flex;
@@ -138,7 +129,6 @@
   color: #ffffff;
   transition: color 0.25s ease;
 }
-
 .btn-login:hover i {
   color: var(--accent-red);
 }
@@ -149,7 +139,6 @@
   color: #ffffff;
   transition: color 0.25s ease;
 }
-
 .btn-logout:hover i {
   color: var(--accent-red);
 }
@@ -160,7 +149,6 @@
   color: #ffffff;
   transition: color 0.25s ease;
 }
-
 .btn-whatsapp:hover i {
   color: #25D366;
 }
@@ -182,7 +170,6 @@
 }
 
 /* Modal login required */
-/* modal fechado (default) */
 .modal-root {
   position: fixed;
   inset: 0;
@@ -198,17 +185,8 @@
   position: absolute;
   inset: 0;
   background: rgba(0, 0, 0, 0.0);
+  transition: background 250ms ease;
   z-index: 1500;
-}
-
-/* modal aberto (estado) */
-.modal-root.modal-open {
-  visibility: visible;
-  pointer-events: auto;
-}
-
-.modal-root.modal-open .modal-backdrop {
-  background: rgba(0, 0, 0, 0.6);
 }
 
 .modal-panel {
@@ -222,16 +200,8 @@
   border-radius: 8px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   padding: 32px 28px 56px;
-
-  opacity: 0;
-  transform: translateY(10px) scale(0.15);
-
-  transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
-}
-
-.modal-root.modal-open .modal-panel {
-  opacity: 1;
-  transform: translateY(0) scale(1);
+  opacity: 0; 
+  transform: translateY(10px) scale(.096);
 }
 
 .modal-panel h3 {
@@ -255,70 +225,47 @@
   pointer-events: auto;
 }
 
-/* MODAL — BOTÃO FECHAR (X) */
-#login-modal .modal-close {
+.modal-close {
   position: absolute;
-  /* Ajuste de posição: Alinhado com o padding do container (que é 32px/28px) */
-  top: 28px;
-  right: 28px;
-
-  width: 32px;
-  height: 32px;
-
-  /* Reset TOTAL de bordas e anéis nativos */
-  background: transparent;
-  border: none;
-  outline: none;
-  box-shadow: none;
-
-  /* Estilo do ícone */
-  cursor: pointer;
-  color: #bdbdbd;
-  font-size: 28px;
-  /* Tamanho levemente ajustado */
-  line-height: 1;
-
+  top: 10px;
+  right: 10px;
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
-
-  appearance: none;
-  -webkit-appearance: none;
-
-  transition: transform 0.2s ease, color 0.2s ease;
-}
-
-#login-modal .modal-close:hover {
-  color: var(--accent-red);
-  background: transparent;
+  background: rgba(255, 255, 255, 0.04);
   border: none;
-  outline: none;
-  box-shadow: none;
-  transform: scale(1.5);
+  border-radius: 50%;
+  color: #bbb;
+  font-size: 26px;
+  cursor: pointer;
+  transition: background-color 0.25s ease, color 0.25s ease, transform 0.2s ease;
 }
 
-#login-modal .modal-close:focus,
-#login-modal .modal-close:focus-visible {
-  outline: none !important;
-  border: none !important;
-  box-shadow: none !important;
+.modal-close:hover {
+  background: rgba(230, 0, 0, 0.15);
+  color: var(--accent-red);
+  transform: scale(1.15);
 }
 
-/* CLIQUE */
-#login-modal .modal-close:active {
-  transform: scale(1);
+.modal-close:active {
+  transform: scale(0.95);
+}
+
+.modal-open {
+  pointer-events: auto;
+}
+
+.modal-open .modal-panel {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  animation: modalPop 0.25s ease-out;
 }
 
 @keyframes modalPop {
-  from {
-    opacity: 0;
-    transform: translateY(10px) scale(0.96);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
+  from { opacity: 0; transform: translateY(10px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 /* Seleção de serviços (agendamento) */
@@ -355,43 +302,4 @@
 .servico-card.active {
   background: red;
   border-color: red;
-}
-
-/* =========================
-   MODAL — BOTÃO LOGIN NECESSÁRIO
-========================= */
-
-.modal-login {
-  background: var(--accent-red);
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  padding: 12px 18px;
-  font-weight: 700;
-  font-size: 0.95rem;
-  cursor: pointer;
-  transition:
-    background-color 0.25s ease,
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
-}
-
-.modal-login:hover {
-  background: #1ebe57;
-  /* mesmo verde do CTA */
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
-}
-
-.modal-login:active {
-  transform: scale(0.96);
-}
-
-/* variação menor (já usada no HTML) */
-.modal-login.small {
-  position: absolute;
-  right: 16px;
-  bottom: 16px;
-  padding: 8px 14px;
-  font-size: 0.85rem;
 }
