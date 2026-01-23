@@ -4,16 +4,14 @@
    ========================== */
 
 .auth-page {
-  padding-top: 160px;
-  /* compensa header fixo */
+  padding-top: 160px; /* compensa header fixo */
   padding-left: 5%;
   padding-right: 5%;
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  flex-direction: column;
-  /* mantém o agendamento empilhado */
+  flex-direction: column; /* mantém o agendamento empilhado */
   align-items: center;
 }
 
@@ -80,8 +78,7 @@
 }
 
 .form-submit button,
-.form-submit .cta-agendar,
-.cta-agendar-css {
+.form-submit .cta-agendar, .cta-agendar-css {
   width: 100%;
 }
 
@@ -121,8 +118,7 @@
 
 /* UX estados de botões */
 button:disabled,
-.cta-agendar.disabled,
-.cta-agendar-css.disabled {
+.cta-agendar.disabled, .cta-agendar-css.disabled {
   opacity: 0.6;
   cursor: not-allowed;
   transform: none;
@@ -172,8 +168,7 @@ button:disabled,
   text-align: center;
 }
 
-.agendamento-card .cta-agendar,
-.cta-agendar-css {
+.agendamento-card .cta-agendar, .cta-agendar-css {
   width: 100%;
   max-width: 100%;
   text-align: center;
