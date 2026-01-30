@@ -42,25 +42,16 @@
 
             <form id="form-agendamento">
 
-                <label>Serviço</label>
-
-                <div class="servicos-opcoes">
-
-                    <label class="servico-card">
-                        <input type="radio" name="servico" value="Corte Clássico">
-                        <span>✂️ Corte Clássico</span>
-                    </label>
-
-                    <label class="servico-card">
-                        <input type="radio" name="servico" value="Barba Terapia">
-                        <span>🧔 Barba Terapia</span>
-                    </label>
-
-                    <label class="servico-card">
-                        <input type="radio" name="servico" value="Combo Ramos">
-                        <span>👑 Combo Ramos</span>
-                    </label>
-
+                <div class="form-group agendamento-servico">
+                    <label>Serviço</label>
+                    <div class="agendamento-servico__field">
+                        <select name="servicos" id="servicos" class="agendamento-servico__select is-hidden" multiple required>
+                        </select>
+                        <button type="button" class="agendamento-servico__trigger" id="servicos-trigger" aria-expanded="false">
+                            Selecione pelo menos 1 serviço
+                        </button>
+                        <div class="agendamento-servico__options" id="servicos-opcoes" role="listbox" aria-multiselectable="true"></div>
+                    </div>
                 </div>
 
                 <div class="form-group agendamento-barbeiro">

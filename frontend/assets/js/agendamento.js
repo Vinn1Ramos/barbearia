@@ -20,23 +20,159 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     //Seleciona o serviço
     let servicoSelecionado = "";
+    let servicosSelecionados = [];
 
-    const cards = document.querySelectorAll('.servico-card');
+    const servicesSelect = document.getElementById('servicos');
+    const servicesOptions = document.getElementById('servicos-opcoes');
+    const servicesTrigger = document.getElementById('servicos-trigger');
 
-    cards.forEach(card => {
-        const input = card.querySelector('input');
+    if (servicesSelect) {
+        servicesSelect.innerHTML = '<option value="" disabled selected>Carregando serviços...</option>';
+        servicesSelect.disabled = true;
+    }
 
-        card.addEventListener('click', () => {
-            // marca o radio
-            input.checked = true;
+    if (servicesTrigger) {
+        servicesTrigger.disabled = true;
+    }
 
-            // salva valor
-            servicoSelecionado = input.value;
+    if (servicesOptions) {
+        servicesOptions.innerHTML = '<div class="agendamento-servico__empty">Carregando serviços...</div>';
+    }
 
-            // visual ativo
-            cards.forEach(c => c.classList.remove('active'));
-            card.classList.add('active');
+    let services = [];
+    try {
+        services = await window.consultService();
+        console.log(services);
+    } catch (err) {
+        console.error(err);
+    }
+
+    if (servicesSelect) {
+        servicesSelect.innerHTML = '<option value="" disabled selected>Selecione pelo menos 1 serviço</option>';
+        servicesSelect.disabled = false;
+    }
+
+    if (servicesTrigger) {
+        servicesTrigger.disabled = false;
+    }
+
+    if (servicesOptions) {
+        servicesOptions.innerHTML = '';
+    }
+
+    let servicosSelecionadosIds = [];
+
+    const atualizarServicosSelecionados = () => {
+        if (!servicesSelect) return;
+
+        const selecionados = Array.from(servicesSelect.selectedOptions);
+
+        servicosSelecionados = selecionados
+            .map(opt => opt.value)
+            .filter(value => value);
+
+        servicosSelecionadosIds = selecionados
+            .map(opt => opt.dataset.id)
+            .filter(id => id);
+
+        servicoSelecionado = servicosSelecionados[servicosSelecionados.length - 1] || "";
+
+        console.log("Nomes:", servicosSelecionados);
+        console.log("IDs:", servicosSelecionadosIds);
+
+        atualizarTextoTrigger();
+    };
+
+    const atualizarTextoTrigger = () => {
+        if (!servicesTrigger) return;
+        if (!servicosSelecionados.length) {
+            servicesTrigger.textContent = 'Selecione pelo menos 1 serviço';
+            return;
+        }
+
+        if (servicosSelecionados.length <= 2) {
+            servicesTrigger.textContent = servicosSelecionados.join(', ');
+            return;
+        }
+
+        servicesTrigger.textContent = `${servicosSelecionados.length} serviços selecionados`;
+    };
+
+    let optionsOpen = false;
+    const openOptions = () => {
+        if (!servicesOptions || servicesOptions.children.length === 0) return;
+        servicesOptions.classList.add('is-open');
+        servicesTrigger?.classList.add('is-open');
+        servicesTrigger?.setAttribute('aria-expanded', 'true');
+        optionsOpen = true;
+    };
+
+    const closeOptions = () => {
+        servicesOptions?.classList.remove('is-open');
+        servicesTrigger?.classList.remove('is-open');
+        servicesTrigger?.setAttribute('aria-expanded', 'false');
+        optionsOpen = false;
+    };
+
+    services.forEach((s) => {
+        const opt = document.createElement("option");
+        opt.value = s.nome;
+        opt.textContent = s.nome;
+        opt.dataset.id = s.id;
+        servicesSelect.appendChild(opt);
+
+        if (servicesOptions) {
+            const label = document.createElement('label');
+            label.className = 'agendamento-servico__option';
+
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.value = s.nome;
+            checkbox.dataset.id = s.id;
+
+            const text = document.createElement('span');
+            text.textContent = s.nome;
+
+            label.appendChild(checkbox);
+            label.appendChild(text);
+            servicesOptions.appendChild(label);
+
+            checkbox.addEventListener('change', () => {
+                opt.selected = checkbox.checked;
+                label.classList.toggle('is-selected', checkbox.checked);
+                atualizarServicosSelecionados();
+            });
+        }
+    });
+
+    if (servicesOptions && services.length === 0) {
+        servicesOptions.innerHTML = '<div class="agendamento-servico__empty">Nenhum serviço disponível.</div>';
+    }
+
+    atualizarServicosSelecionados();
+
+    if (servicesTrigger && servicesOptions) {
+        servicesTrigger.addEventListener('click', (event) => {
+            event.preventDefault();
+            if (optionsOpen) {
+                closeOptions();
+            } else {
+                openOptions();
+            }
         });
+    }
+
+    document.addEventListener('click', (event) => {
+        if (!optionsOpen) return;
+        const field = servicesTrigger?.closest('.agendamento-servico__field');
+        if (field && field.contains(event.target)) return;
+        closeOptions();
+    });
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key !== 'Escape' || !optionsOpen) return;
+        closeOptions();
+        servicesTrigger?.focus();
     });
 
     // ============================
@@ -48,15 +184,15 @@ document.addEventListener('DOMContentLoaded', async () => {
     try {
         const barbeiros = await window.consultBarbeiros();
 
-        const select = document.getElementById("barbeiro"); 
+        const select = document.getElementById("barbeiro");
 
         // limpa e adiciona placeholder
         select.innerHTML = '<option value="">Selecione um barbeiro</option>';
 
         barbeiros.forEach((b) => {
             const opt = document.createElement("option");
-            opt.value = b.id;     
-            opt.textContent = b.nome || b.name;     
+            opt.value = b.id;
+            opt.textContent = b.nome || b.name;
             select.appendChild(opt);
         });
 
@@ -181,20 +317,20 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 
     barbeiroSelect.addEventListener('change', async () => {
-    // Coleta horarios ja marcados na data selecionada
-    const agendamentos = await window.consultAgendamentos(new Date(dataInput.value).toISOString(), parseInt(barbeiroSelect.value));
-    const horarios = agendamentos.map(ag => ({
-        horaInicio: ag.horaInicio,
-        horaFim: ag.horaFim
-    }))
-    const horariosList = []
-    horarios.forEach(h => {
-        horariosList.push([converterParaMinutos(h.horaInicio), converterParaMinutos(h.horaFim)])
-    })
+        // Coleta horarios ja marcados na data selecionada
+        const agendamentos = await window.consultAgendamentos(new Date(dataInput.value).toISOString(), parseInt(barbeiroSelect.value));
+        const horarios = agendamentos.map(ag => ({
+            horaInicio: ag.horaInicio,
+            horaFim: ag.horaFim
+        }))
+        const horariosList = []
+        horarios.forEach(h => {
+            horariosList.push([converterParaMinutos(h.horaInicio), converterParaMinutos(h.horaFim)])
+        })
 
-    const dataSelecionada = new Date(`${dataInput.value}T00:00`);
-    mesAtual = new Date(dataSelecionada.getFullYear(), dataSelecionada.getMonth(), 1);
-    gerarHorariosDisponiveis(dataInput.value, horariosList);
+        const dataSelecionada = new Date(`${dataInput.value}T00:00`);
+        mesAtual = new Date(dataSelecionada.getFullYear(), dataSelecionada.getMonth(), 1);
+        gerarHorariosDisponiveis(dataInput.value, horariosList);
     });
 
 
@@ -285,7 +421,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     agendarBtn.addEventListener('click', async () => {
 
-        if (!servicoSelecionado) {
+        if (!servicosSelecionados.length) {
             alert("Selecione um serviço.");
             return;
         }

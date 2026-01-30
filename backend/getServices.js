@@ -1,35 +1,25 @@
-window.consultServiceId = async function consultServiceId(servicoSelecionado) {
-    const user = firebase.auth().currentUser;
-    const idToken = await user.getIdToken();
+// getServices.js
+window.consultService = async function consultService() {
+  const user = firebase.auth().currentUser || await waitForAuthReady();
+  if (!user) throw new Error("Usuário não autenticado.");
 
-    const filter = encodeURIComponent(JSON.stringify({
-        where: { nome: servicoSelecionado },
-        limit: 1
-    }));
+  const idToken = await user.getIdToken();
 
-    const res = await fetch(`${API}/servicos/?filter=${filter}`, {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${idToken}`,
-            "ngrok-skip-browser-warning": "true"
-        }
-    });
-
-    const data = await res.json().catch(() => ([]))
-
-    if (!res.ok) {
-        console.error("Erro API:", data);
-        throw new Error(data?.error?.message || "Erro ao buscar serviço");
+  const res = await fetch(`${API}/servicos`, {
+    method: "GET",
+    headers: {
+      "Authorization": `Bearer ${idToken}`,
+      "ngrok-skip-browser-warning": "true"
     }
-    const service = Array.isArray(data) ? data[0] : null;
+  });
 
-    if (!service) {
-        throw new Error("Serviço não encontrado no banco (não cadastrado).");
-    }
+  let data;
+  try { data = await res.json(); } catch { data = null; }
 
-    console.log("API status:", res.status);
-    console.log("User Data:", data);
-    
-    return service; // aqui você já tem id do MySQL, nome, email, etc
-}
+  if (!res.ok) {
+    console.error("Erro API:", data);
+    throw new Error(data?.error?.message || "Erro ao buscar serviços");
+  }
+
+  return Array.isArray(data) ? data : [];
+};
