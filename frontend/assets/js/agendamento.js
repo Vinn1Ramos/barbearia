@@ -69,6 +69,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     // ============================
     // DATA E HORA - CONTROLE TOTAL
     // ============================
+    const barbeiroSelect = document.getElementById('barbeiro');
     const dataInput = document.getElementById('data');
     const horaInput = document.getElementById('hora');
     const calendarioGrid = document.getElementById('agendamento-calendario');
@@ -179,6 +180,24 @@ document.addEventListener('DOMContentLoaded', async () => {
         gerarHorariosDisponiveis(dataInput.value, horariosList);
     });
 
+    barbeiroSelect.addEventListener('change', async () => {
+    // Coleta horarios ja marcados na data selecionada
+    const agendamentos = await window.consultAgendamentos(new Date(dataInput.value).toISOString(), parseInt(barbeiroSelect.value));
+    const horarios = agendamentos.map(ag => ({
+        horaInicio: ag.horaInicio,
+        horaFim: ag.horaFim
+    }))
+    const horariosList = []
+    horarios.forEach(h => {
+        horariosList.push([converterParaMinutos(h.horaInicio), converterParaMinutos(h.horaFim)])
+    })
+
+    const dataSelecionada = new Date(`${dataInput.value}T00:00`);
+    mesAtual = new Date(dataSelecionada.getFullYear(), dataSelecionada.getMonth(), 1);
+    gerarHorariosDisponiveis(dataInput.value, horariosList);
+    });
+
+
     // começa bloqueado
     horaInput.disabled = true;
 
@@ -262,7 +281,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     // BOTÃO AGENDAR
     // ============================
     const agendarBtn = document.getElementById('agendarBtn');
-    const barbeiroSelect = document.getElementById('barbeiro');
     console.log(document.getElementById('barbeiro').value)
 
     agendarBtn.addEventListener('click', async () => {
