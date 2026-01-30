@@ -1,5 +1,5 @@
 /*aguarda pagina carregar, monitora mudanças no input*/
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
 
     // ============================
     // CONTROLE DE USUÁRIO LOGADO
@@ -42,7 +42,28 @@ document.addEventListener('DOMContentLoaded', () => {
     // ============================
     // BARBEIRO
     // ============================
-    const barbeiroSelect = document.getElementById('barbeiro');
+    // agendamento.js
+
+
+    try {
+        const barbeiros = await window.consultBarbeiros();
+
+        const select = document.getElementById("barbeiro"); 
+
+        // limpa e adiciona placeholder
+        select.innerHTML = '<option value="">Selecione um barbeiro</option>';
+
+        barbeiros.forEach((b) => {
+            const opt = document.createElement("option");
+            opt.value = b.id;     
+            opt.textContent = b.nome || b.name;     
+            select.appendChild(opt);
+        });
+
+    } catch (err) {
+        console.error(err);
+        // opcional: mostrar mensagem visual ao usuário
+    }
 
 
     // ============================
@@ -142,7 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
         // Coleta horarios ja marcados na data selecionada
-        const agendamentos = await window.consultAgendamentos(new Date(dataInput.value).toISOString())
+        const agendamentos = await window.consultAgendamentos(new Date(dataInput.value).toISOString(), parseInt(barbeiroSelect.value));
         const horarios = agendamentos.map(ag => ({
             horaInicio: ag.horaInicio,
             horaFim: ag.horaFim
@@ -157,7 +178,6 @@ document.addEventListener('DOMContentLoaded', () => {
         renderCalendario();
         gerarHorariosDisponiveis(dataInput.value, horariosList);
     });
-
 
     // começa bloqueado
     horaInput.disabled = true;
@@ -242,6 +262,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // BOTÃO AGENDAR
     // ============================
     const agendarBtn = document.getElementById('agendarBtn');
+    const barbeiroSelect = document.getElementById('barbeiro');
+    console.log(document.getElementById('barbeiro').value)
 
     agendarBtn.addEventListener('click', async () => {
 
@@ -278,7 +300,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
         const user = await window.consultUserId()
-
         const service = await window.consultServiceId(servicoSelecionado)
         const duracao = converterParaMinutos(horaInput.value) + service.duracao_minutos
         const horaFinal = formatarTempo(duracao)
@@ -286,7 +307,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const agendamentoData = {
             usuario_id: user.id,
             servico_id: service.id,
-            barbeiro_id: 0,
+            barbeiro_id: parseInt(barbeiroSelect.value),
             data: new Date(dataInput.value).toISOString(),
             horaInicio: horaInput.value + ':00',
             horaFim: horaFinal + ':00',
