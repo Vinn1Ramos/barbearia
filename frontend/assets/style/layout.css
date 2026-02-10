@@ -1,9 +1,5 @@
-/* ==========================
-   03 - Layout
-   - header/nav, hero, seções e footer
-   ========================== */
+/* Layout - header/nav, hero, seções e footer */
 
-/* Header / Navegação */
 header {
   background: rgba(0, 0, 0, 0.9);
   padding: 0.7rem 5%;
@@ -64,90 +60,111 @@ header {
   width: 100%;
 }
 
-/* 2. O BOTÃO HAMBURGUER (Desktop) */
-/* Escondido por padrão em telas grandes */
 .hamburger {
   display: none;
 }
 
-@media (max-width: 790px) {
+@media (max-width: 850px) {
 
-  /* --- Exibir e Estilizar o Botão --- */
   .hamburger {
     display: flex;
-    /* Aparece no mobile */
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 6px;
-    /* Distância entre as barras */
 
-    width: 40px;
-    height: 40px;
+    width: 45px;
+    height: 45px;
     background: transparent;
     border: none;
     cursor: pointer;
-    z-index: 2001;
-    /* Fica acima do menu aberto */
-  }
-
-  .hamburger:hover .bar:nth-child(1) {
-    transform: translateY(-2px);
-    /* Sobe 2 pixels */
-  }
-
-  .hamburger:hover .bar:nth-child(3) {
-    transform: translateY(2px);
-    /* Desce 2 pixels */
+    z-index: 2100;
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   }
 
   .hamburger .bar {
-    width: 28px;
+    width: 30px;
     height: 3px;
     background-color: #fff;
-    border-radius: 4px;
-    /* Animação suave "elástica" */
-    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    border-radius: 5px;
+    transition: all 0.4s ease;
   }
 
-  /* --- Transformar a Lista em Menu Lateral --- */
+  /* hamburguer aberto */
   .nav-links {
     position: fixed;
     top: 0;
     right: -100%;
-    width: 70%;
+
+    width: 80%;
+    max-width: 400px;
     height: 100vh;
-    background-color: #070707;
+
+    /* EFEITO DE VIDRO ESCURO */
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(15px);
+    /* Desfoca o site atrás */
+
+    /* LINHA VERMELHA NA LATERAL */
+    border-left: 2px solid var(--accent-red);
+
     flex-direction: column;
     justify-content: center;
-    gap: 30px;
-    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
-    transition: right 0.4s ease-in-out;
+    align-items: center;
+    gap: 40px;
+    /* Muito espaço entre links */
+
+    box-shadow: -10px 0 50px rgba(0, 0, 0, 0.8);
+    /* Sombra profunda */
+    transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1);
     z-index: 2000;
-    border-left: 1px solid #222;
   }
 
-  /* 1. Menu entra na tela */
   .nav-links.active {
     right: 0;
   }
 
-  /* 2. Animação do Ícone virando X */
+  /* ESTILIZAÇÃO DOS LINKS NO MOBILE */
+  .nav-links li a {
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: rgba(255, 255, 255, 0.7);
+    transition: 0.3s;
+  }
+
+  .nav-links li a:hover {
+    color: #fff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    transform: translateX(10px);
+  }
+
+  .nav-links li a::after {
+    display: none;
+  }
+
+  .hamburger.active {
+    transform: rotate(180deg);
+  }
+
   .hamburger.active .bar:nth-child(1) {
     transform: translateY(9px) rotate(45deg);
     background-color: var(--accent-red);
+    box-shadow: 0 0 8px var(--accent-red);
   }
 
   .hamburger.active .bar:nth-child(2) {
     opacity: 0;
     transform: translateX(-20px);
-    /* Efeito de tiro */
   }
 
   .hamburger.active .bar:nth-child(3) {
     transform: translateY(-9px) rotate(-45deg);
     background-color: var(--accent-red);
+    box-shadow: 0 0 8px var(--accent-red);
   }
+
 }
 
 nav {
