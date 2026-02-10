@@ -331,7 +331,7 @@ nav ul li a:hover {
 .menu-toggle.active .hamburger {
   background: transparent;
 }
-//
+
 .menu-toggle.active .hamburger::before {
   transform: rotate(45deg) translate(5px, 6px);
 }
