@@ -31,12 +31,20 @@
                 <img src="../assets/img/Captura_de_tela_2026-01-05_233355-removebg-preview.png" alt="logo nome"
                     id="brand-name">
             </div>
-            <ul>
-                <li><a href="../index.html">Home</a></li>
-                <li><a href="../index.html#servicos">Serviços</a></li>
-                <li><a href="#assinaturas">Assinaturas</a></li>
-                <li><a href="../index.html#contato">Contato</a></li>
+
+            <button class="hamburger" aria-label="Abrir menu principal">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+
+            <ul class="nav-links">
+                <li><a href="../index.html">Início</a></li>
+                <li><a href="../servicos">Serviços</a></li>
+                <li><a href="../pages/assinaturas.html">Assinaturas</a></li>
+                <li><a href="#Filiais">Filiais</a></li>
             </ul>
+
             <div class="header-controls">
                 <a href="../index.html" class="icon-btn btn-voltar" title="Voltar" aria-label="Voltar">
                     <i class="fas fa-arrow-left"></i>
@@ -93,7 +101,7 @@
                 <div class="d-grid">
                     <div class="form-submit">
 
-                    <button type="submit" class="cta-agendar-css" id="btn-reg">Registrar</button>
+                        <button type="submit" class="cta-agendar-css" id="btn-reg">Registrar</button>
 
                     </div>
                 </div>
@@ -116,8 +124,8 @@
             <div class="footer-col footer-brand">
                 <div class="footer-brand-logos">
                     <img src="../assets/img/logo.png" alt="Ramos Barbearia" class="footer-logo">
-                    <img src="../assets/img/Captura_de_tela_2026-01-05_233355-removebg-preview.png" alt="Ramos Barbearia"
-                        class="footer-name">
+                    <img src="../assets/img/Captura_de_tela_2026-01-05_233355-removebg-preview.png"
+                        alt="Ramos Barbearia" class="footer-name">
                 </div>
                 <p class="footer-desc">
                     Tradição, estilo e atendimento premium. Agende seu horário e saia no grau.
@@ -128,60 +136,54 @@
             <div class="footer-col">
                 <h3 class="footer-title">Links rápidos</h3>
                 <ul class="footer-links">
-                    <li><a href="#hero">Home</a></li>
-                    <li><a href="#servicos">Serviços</a></li>
-                    <li><a href="#contato">Contato</a></li>
-                    <li><a href="pages/agendamento.html">Agendar</a></li>
-                </ul>
+
+                    <!-- Coluna: Horário -->
+                    <div class="footer-col">
+                        <h3 class="footer-title">Horário</h3>
+                        <ul class="footer-info">
+                            <li><i class="fa-solid fa-clock"></i> Seg a Sex: 09:00 – 19:00</li>
+                            <li><i class="fa-solid fa-clock"></i> Sábado: 09:00 – 17:00</li>
+                            <li><i class="fa-solid fa-ban"></i> Domingo: Fechado</li>
+                        </ul>
+                    </div>
+
+                    <!-- Coluna: Contato -->
+                    <div class="footer-col">
+                        <h3 class="footer-title">Contato</h3>
+                        <ul class="footer-info">
+                            <li>
+                                <a class="footer-contact"
+                                    href="https://wa.me/5132472310?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20um%20hor%C3%A1rio%20na%20Ramos%20Barbearia.%20"
+                                    target="_blank" rel="noopener noreferrer">
+                                    <i class="fa-brands fa-whatsapp"></i>
+                                    <span>WhatsApp</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="footer-contact" href="#" target="_blank" rel="noopener noreferrer">
+                                    <i class="fa-brands fa-instagram"></i>
+                                    <span>@ramosbarbearia</span>
+                                </a>
+                            </li>
+                            <li>
+                                <span class="footer-contact">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                    <span>Rua Exemplo, 123 - Centro</span>
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
             </div>
 
-            <!-- Coluna: Horário -->
-            <div class="footer-col">
-                <h3 class="footer-title">Horário</h3>
-                <ul class="footer-info">
-                    <li><i class="fa-solid fa-clock"></i> Seg a Sex: 09:00 – 19:00</li>
-                    <li><i class="fa-solid fa-clock"></i> Sábado: 09:00 – 17:00</li>
-                    <li><i class="fa-solid fa-ban"></i> Domingo: Fechado</li>
-                </ul>
+            <!-- Faixa inferior -->
+            <div class="footer-bottom">
+                <p>© 2024 Ramos Barbearia - Todos os direitos reservados.</p>
+                <div class="footer-legal">
+                    <a href="#">Política de Privacidade</a>
+                    <span class="footer-sep">•</span>
+                    <a href="#">Termos de Uso</a>
+                </div>
             </div>
-
-            <!-- Coluna: Contato -->
-            <div class="footer-col">
-                <h3 class="footer-title">Contato</h3>
-                <ul class="footer-info">
-                    <li>
-                        <a class="footer-contact"
-                            href="https://wa.me/5132472310?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20um%20hor%C3%A1rio%20na%20Ramos%20Barbearia.%20"
-                            target="_blank" rel="noopener noreferrer">
-                            <i class="fa-brands fa-whatsapp"></i>
-                            <span>WhatsApp</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="footer-contact" href="#" target="_blank" rel="noopener noreferrer">
-                            <i class="fa-brands fa-instagram"></i>
-                            <span>@ramosbarbearia</span>
-                        </a>
-                    </li>
-                    <li>
-                        <span class="footer-contact">
-                            <i class="fa-solid fa-location-dot"></i>
-                            <span>Rua Exemplo, 123 - Centro</span>
-                        </span>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Faixa inferior -->
-        <div class="footer-bottom">
-            <p>© 2024 Ramos Barbearia - Todos os direitos reservados.</p>
-            <div class="footer-legal">
-                <a href="#">Política de Privacidade</a>
-                <span class="footer-sep">•</span>
-                <a href="#">Termos de Uso</a>
-            </div>
-        </div>
     </footer>
 </body>
 

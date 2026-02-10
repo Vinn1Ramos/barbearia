@@ -5,22 +5,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agendamento - Ramos Barbearia</title>
-
-    <!-- CSS principal do projeto -->
     <link rel="stylesheet" href="../assets/style/style.css">
 </head>
 
 <body>
-
-    <!-- HEADER / NAVBAR -->
     <header>
         <nav id="navbar">
             <img src="../assets/img/logo.png" alt="Ramos Barbearia" class="logo-nav">
 
-            <ul>
-                <li><a href="../index.html">Home</a></li>
-                <li><a href="../index.html#servicos">Serviços</a></li>
+            <button class="hamburger" aria-label="Abrir menu principal">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+
+            <ul class="nav-links">
+                <li><a href="../index.html">Início</a></li>
+                <li><a href="../servicos">Serviços</a></li>
+                <li><a href="../pages/assinaturas.html">Assinaturas</a></li>
+                <li><a href="#Filiais">Filiais</a></li>
             </ul>
+            
             <a href="../index.html" class="cta-agendarr">Voltar</a>
         </nav>
     </header>
@@ -45,12 +50,15 @@
                 <div class="form-group agendamento-servico">
                     <label>Serviço</label>
                     <div class="agendamento-servico__field">
-                        <select name="servicos" id="servicos" class="agendamento-servico__select is-hidden" multiple required>
+                        <select name="servicos" id="servicos" class="agendamento-servico__select is-hidden" multiple
+                            required>
                         </select>
-                        <button type="button" class="agendamento-servico__trigger" id="servicos-trigger" aria-expanded="false">
+                        <button type="button" class="agendamento-servico__trigger" id="servicos-trigger"
+                            aria-expanded="false">
                             Selecione pelo menos 1 serviço
                         </button>
-                        <div class="agendamento-servico__options" id="servicos-opcoes" role="listbox" aria-multiselectable="true"></div>
+                        <div class="agendamento-servico__options" id="servicos-opcoes" role="listbox"
+                            aria-multiselectable="true"></div>
                     </div>
                 </div>
 
@@ -116,8 +124,8 @@
             <div class="footer-col footer-brand">
                 <div class="footer-brand-logos">
                     <img src="../assets/img/logo.png" alt="Ramos Barbearia" class="footer-logo">
-                    <img src="../assets/img/Captura_de_tela_2026-01-05_233355-removebg-preview.png" alt="Ramos Barbearia"
-                        class="footer-name">
+                    <img src="../assets/img/Captura_de_tela_2026-01-05_233355-removebg-preview.png"
+                        alt="Ramos Barbearia" class="footer-name">
                 </div>
                 <p class="footer-desc">
                     Tradição, estilo e atendimento premium. Agende seu horário e saia no grau.

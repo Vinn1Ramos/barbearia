@@ -11,7 +11,7 @@
 }
 
 /* evita scroll horizontal em telas pequenas */
-@media (max-width: 800px) {
+@media (max-width: 750px) {
   body {
     overflow-x: hidden;
   }
@@ -79,38 +79,18 @@
   }
 }
 
-.menu-toggle {
-    display: none; 
-}
-
-.nav-links {
-    display: flex;
-    gap: 20px;
-    list-style: none;
-}
-@media (max-width: 850px) {
-    
-    /* Mostra o botão */
-    .burguer {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        width: 30px;
-        height: 21px;
-        background: transparent;
-        border: none;
-        cursor: pointer;
-        z-index: 2001; /* Fica acima do menu aberto */
-    }
-}
 /* Header: mobile UX (mantido como estava) */
-@media (max-width: 768px) {
+@media (max-width: 568px) {
   header {
-    padding: 0.6rem 4%;
+    padding: 0.4rem 4%;
   }
 
   nav {
     justify-content: space-between;
+  }
+
+  nav ul {
+    display: none;
   }
 
   .logo-nav,
@@ -119,8 +99,8 @@
   }
 
   nav .cta-agendar {
-    padding: 8px 14px;
-    font-size: 0.9rem;
+    padding: 5px 10px;
+    font-size: 0.4rem;
   }
 }
 
@@ -130,6 +110,15 @@
     display: grid;
     grid-template-columns: auto 1fr auto;
     align-items: center;
+  }
+
+  nav ul {
+    justify-self: center;
+  }
+
+  nav ul li a {
+    margin: 0 18px;
+    font-size: 0.95rem;
   }
 
   nav .cta-agendar {

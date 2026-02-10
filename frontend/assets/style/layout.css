@@ -14,41 +14,162 @@ header {
   border-bottom: 2px solid var(--accent-red);
 }
 
+/* Garante que os itens do header fiquem alinhados */
+#navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+  position: relative;
+}
+
 .nav-links {
-display: flex;
-    align-items: center;     
-    justify-content: center; 
-    gap: 50px;               
-    list-style: none;
-    margin: 0 auto;          
-    width: auto;          
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-.nav-links li a {
-    text-decoration: none;
-    color: #fff;
-    font-weight: 500;
-    font-size: 1rem;
-    position: relative;
-    transition: color 0.3s ease;
+/* Estilo dos links */
+.nav-links a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 500;
+  position: relative;
+  padding-bottom: 5px;
+  transition: color 0.5s;
 }
 
-/* Efeito Hover Premium (linha vermelha embaixo) */
-.nav-links li a::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: -5px;
-    left: 0;
-    background-color: var(--accent-red); /* Sua cor vermelha */
-    transition: width 0.3s ease;
+/*linha vermelha animada */
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #fff;
+  transition: width 0.4s ease-in-out;
 }
 
-.nav-links li a:hover::after {
-    width: 100%;
+.nav-links a:hover {
+  color: var(--accent-red);
 }
-.nav-links a:hover{
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* 2. O BOTÃO HAMBURGUER (Desktop) */
+/* Escondido por padrão em telas grandes */
+.hamburger {
+  display: none;
+}
+
+@media (max-width: 790px) {
+
+  /* --- Exibir e Estilizar o Botão --- */
+  .hamburger {
+    display: flex;
+    /* Aparece no mobile */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    /* Distância entre as barras */
+
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 2001;
+    /* Fica acima do menu aberto */
+  }
+
+  .hamburger:hover .bar:nth-child(1) {
+    transform: translateY(-2px);
+    /* Sobe 2 pixels */
+  }
+
+  .hamburger:hover .bar:nth-child(3) {
+    transform: translateY(2px);
+    /* Desce 2 pixels */
+  }
+
+  .hamburger .bar {
+    width: 28px;
+    height: 3px;
+    background-color: #fff;
+    border-radius: 4px;
+    /* Animação suave "elástica" */
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  /* --- Transformar a Lista em Menu Lateral --- */
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 70%;
+    height: 100vh;
+    background-color: #070707;
+    flex-direction: column;
+    justify-content: center;
+    gap: 30px;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
+    transition: right 0.4s ease-in-out;
+    z-index: 2000;
+    border-left: 1px solid #222;
+  }
+
+  /* 1. Menu entra na tela */
+  .nav-links.active {
+    right: 0;
+  }
+
+  /* 2. Animação do Ícone virando X */
+  .hamburger.active .bar:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+    background-color: var(--accent-red);
+  }
+
+  .hamburger.active .bar:nth-child(2) {
+    opacity: 0;
+    transform: translateX(-20px);
+    /* Efeito de tiro */
+  }
+
+  .hamburger.active .bar:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+    background-color: var(--accent-red);
+  }
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+}
+
+nav ul li a {
+  color: var(--white);
+  text-decoration: none;
+  margin: 0 15px;
+  font-weight: 700;
+  transition: color 0.2s;
+}
+
+nav ul li a:hover {
   color: var(--accent-red);
 }
 
@@ -65,14 +186,6 @@ display: flex;
 
 #brand-name {
   max-width: 140px;
-}
-
-#navbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between; /* Mantém Logo na ponta e Ícones na outra */
-    padding: 15px 0; /* Ajuste conforme seu gosto */
-    position: relative;
 }
 
 /* Hero */
@@ -270,4 +383,3 @@ display: flex;
 .footer-sep {
   opacity: 0.7;
 }
-

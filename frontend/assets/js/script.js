@@ -119,24 +119,35 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// --- LÓGICA DO MENU SANDUÍCHE ---
 document.addEventListener('DOMContentLoaded', () => {
-    const hamburger = document.querySelector('.burguer');
+    const hamburgerBtn = document.querySelector('.hamburger');
     const navMenu = document.querySelector('.nav-links');
-
-    if (hamburger && navMenu) {
-        // Abrir/Fechar Menu
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
+    const menuLinks = document.querySelectorAll('.nav-links a');
+    if (hamburgerBtn && navMenu) {
+        
+        // Abrir & Fechar ao clicar no botão
+        hamburgerBtn.addEventListener('click', () => {
+            hamburgerBtn.classList.toggle('active');
             navMenu.classList.toggle('active');
         });
 
-        // Fechar ao clicar em um link (Melhora a experiência)
-        document.querySelectorAll('.nav-links a').forEach(link => {
+         // Fechar automaticamente ao clicar em um link
+        menuLinks.forEach(link => {
             link.addEventListener('click', () => {
-                hamburger.classList.remove('active');
+                hamburgerBtn.classList.remove('active');
                 navMenu.classList.remove('active');
             });
+        });
+
+        // Fechar ao clicar fora do menu
+        document.addEventListener('click', (e) => {
+            if (!hamburgerBtn.contains(e.target) && 
+                !navMenu.contains(e.target) && 
+                navMenu.classList.contains('active')) {
+                
+                hamburgerBtn.classList.remove('active');
+                navMenu.classList.remove('active');
+            }
         });
     }
 });
