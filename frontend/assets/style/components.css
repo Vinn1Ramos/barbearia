@@ -321,6 +321,90 @@
   }
 }
 
+/* 1. ESTADO PADRÃO (Desktop/Tablet Grande) */
+.burguer {
+  display: none;
+  /* ESCONDIDO por padrão */
+}
+
+/* Garante que os links apareçam lado a lado no Desktop */
+.nav-links {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+}
+
+/* 2. ESTADO MOBILE (Celulares e Tablets Pequenos) */
+@media (max-width: 850px) {
+
+  /* Mostra o botão */
+  .burguer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 2001;
+    /* Fica acima do menu aberto */
+  }
+
+  /* Estilo das barras do hambúrguer */
+  .burguer .bar {
+    height: 3px;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 3px;
+    transition: 0.3s;
+  }
+
+  /* O Menu Lateral (Escondido inicialmente) */
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    /* Joga para fora da tela à direita */
+    width: 70%;
+    /* Ocupa 70% da tela */
+    height: 100vh;
+    background-color: #070707;
+    /* Fundo preto */
+    border-left: 1px solid #333;
+
+    flex-direction: column;
+    /* Links um embaixo do outro */
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+
+    transition: 0.4s ease-in-out;
+    /* Animação suave */
+    z-index: 2000;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
+  }
+
+  /* Classe que o JS vai adicionar para mostrar o menu */
+  .nav-links.active {
+    right: 0;
+    /* Traz para dentro da tela */
+  }
+
+  /* Animação do X (Opcional - Transforma as barras em X) */
+  .burguer.active .bar:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+  }
+
+  .burguer.active .bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .menu-toggle.active .bar:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+  }
+}
+
 /* Seleção de serviços (agendamento) */
 .servicos-opcoes {
   display: flex;

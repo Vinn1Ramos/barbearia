@@ -120,22 +120,23 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // --- LÓGICA DO MENU SANDUÍCHE ---
-    const menuToggle = document.querySelector('.menu-toggle');
-    const navLinks = document.querySelector('.nav-links');
-    const links = document.querySelectorAll('.nav-links a');
+document.addEventListener('DOMContentLoaded', () => {
+    const hamburger = document.querySelector('.burguer');
+    const navMenu = document.querySelector('.nav-links');
 
-if (menuToggle && navLinks) {
-    menuToggle.addEventListener('click', () => {
-        // Alterna a classe 'active' no botão e na lista <ul>
-        menuToggle.classList.toggle('active');
-        navLinks.classList.toggle('active');
-    });
-
-    // Fecha o menu automaticamente ao clicar em um link
-    links.forEach(link => {
-        link.addEventListener('click', () => {
-            menuToggle.classList.remove('active');
-            navLinks.classList.remove('active');
+    if (hamburger && navMenu) {
+        // Abrir/Fechar Menu
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
         });
-    });
-}
+
+        // Fechar ao clicar em um link (Melhora a experiência)
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+    }
+});
