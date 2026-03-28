@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // ===== FUNÇÃO DE REGISTRO =====
+    // FUNÇÃO DE REGISTRO 
     const emailInput = document.getElementById("reg-email");
     const passwordInput = document.getElementById("reg-password");
     const passwordConfirmInput = document.getElementById("reg-password-confirm");
@@ -9,9 +9,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const celInput = document.getElementById("reg-cel");
 
 
-    // ================================
+   
     // VALIDAÇÃO EM TEMPO REAL
-    // ================================
+   
     function validarFormularioRegistro() {
         const email = emailInput.value.trim();
         const password = passwordInput.value;
@@ -37,9 +37,9 @@ document.addEventListener("DOMContentLoaded", function () {
         input.addEventListener("input", validarFormularioRegistro);
     });
 
-    // ================================
+
     // SUBMIT DO REGISTRO
-    // ================================
+
     btnRegister.addEventListener("click", function (e) {
         e.preventDefault();
         showLoading();
